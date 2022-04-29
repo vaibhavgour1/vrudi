@@ -58,17 +58,7 @@ class _SignUpState extends State<SignUp> {
                       counterText: "",
                       hintText: "Please Enter Email Id",
                       prefixIcon: const Icon(Icons.email, color: Colors.black),
-                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
-                      enabledBorder:
-                          OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
-                      disabledBorder:
-                          OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
-                      focusedBorder:
-                          OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
-                      errorBorder:
-                          OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
-                      focusedErrorBorder:
-                          OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
+
                       prefixIconConstraints:
                           const BoxConstraints(minWidth: 50, minHeight: 25, maxWidth: 51, maxHeight: 25),
                       // errorText: Validator.validateMobile(edtMobile.text, context),
@@ -91,17 +81,7 @@ class _SignUpState extends State<SignUp> {
                       counterText: "",
                       hintText: "Please Enter Full name",
                       prefixIcon: const Icon(Icons.person, color: Colors.black),
-                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
-                      enabledBorder:
-                          OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
-                      disabledBorder:
-                          OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
-                      focusedBorder:
-                          OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
-                      errorBorder:
-                          OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
-                      focusedErrorBorder:
-                          OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
+
                       prefixIconConstraints:
                           const BoxConstraints(minWidth: 50, minHeight: 25, maxWidth: 51, maxHeight: 25),
                       // errorText: Validator.validateMobile(edtMobile.text, context),
@@ -124,17 +104,7 @@ class _SignUpState extends State<SignUp> {
                       counterText: "",
                       hintText: "Please Enter User Name",
                       prefixIcon: const Icon(Icons.supervised_user_circle, color: Colors.black),
-                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
-                      enabledBorder:
-                          OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
-                      disabledBorder:
-                          OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
-                      focusedBorder:
-                          OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
-                      errorBorder:
-                          OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
-                      focusedErrorBorder:
-                          OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
+
                       prefixIconConstraints:
                           const BoxConstraints(minWidth: 50, minHeight: 25, maxWidth: 51, maxHeight: 25),
                       // errorText: Validator.validateMobile(edtMobile.text, context),
@@ -159,17 +129,7 @@ class _SignUpState extends State<SignUp> {
                       counterText: "",
                       hintText: "Please Enter Password",
                       prefixIcon: const Icon(Icons.key, color: Colors.black),
-                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
-                      enabledBorder:
-                          OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
-                      disabledBorder:
-                          OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
-                      focusedBorder:
-                          OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
-                      errorBorder:
-                          OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
-                      focusedErrorBorder:
-                          OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
+
                       prefixIconConstraints:
                           const BoxConstraints(minWidth: 50, minHeight: 25, maxWidth: 51, maxHeight: 25),
                       // errorText: Validator.validateMobile(edtMobile.text, context),
@@ -194,17 +154,7 @@ class _SignUpState extends State<SignUp> {
                       counterText: "",
                       hintText: "Please Enter Password Again",
                       prefixIcon: const Icon(Icons.key, color: Colors.black),
-                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
-                      enabledBorder:
-                          OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
-                      disabledBorder:
-                          OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
-                      focusedBorder:
-                          OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
-                      errorBorder:
-                          OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
-                      focusedErrorBorder:
-                          OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
+
                       prefixIconConstraints:
                           const BoxConstraints(minWidth: 50, minHeight: 25, maxWidth: 51, maxHeight: 25),
                       // errorText: Validator.validateMobile(edtMobile.text, context),
@@ -218,25 +168,18 @@ class _SignUpState extends State<SignUp> {
                   height: 50,
                   padding: const EdgeInsets.symmetric(horizontal: 30),
                   child: TextFormField(
-                    autovalidateMode: AutovalidateMode.onUserInteraction,
-                    controller: securityController,
+                    readOnly: true,
                     decoration: InputDecoration(
                       filled: true,
                       fillColor: const Color.fromRGBO(242, 242, 242, 1),
                       counterText: "",
-                      hintText: "Please Select Security question",
-                      prefixIcon: const Icon(Icons.question_answer, color: Colors.black),
-                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
-                      enabledBorder:
-                          OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
-                      disabledBorder:
-                          OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
-                      focusedBorder:
-                          OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
-                      errorBorder:
-                          OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
-                      focusedErrorBorder:
-                          OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
+                      hintText: "Select Your Favourite Hobey",
+                      // hintStyle: TextStyle(fontSize: 14),
+                      prefixIcon: const Icon(
+                        Icons.question_answer,
+                        color: Colors.black,
+                      ),
+
                       prefixIconConstraints:
                           const BoxConstraints(minWidth: 50, minHeight: 25, maxWidth: 51, maxHeight: 25),
                       // errorText: Validator.validateMobile(edtMobile.text, context),
@@ -250,25 +193,18 @@ class _SignUpState extends State<SignUp> {
                   height: 50,
                   padding: const EdgeInsets.symmetric(horizontal: 30),
                   child: TextFormField(
-                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    readOnly: true,
+                    onTap: () {
+                      bottomSheet();
+                    },
                     controller: selectSecurityController,
                     decoration: InputDecoration(
                       filled: true,
                       fillColor: const Color.fromRGBO(242, 242, 242, 1),
                       counterText: "",
                       hintText: "Please Enter Security Answer",
-                      prefixIcon: const Icon(Icons.security, color: Colors.black),
-                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
-                      enabledBorder:
-                          OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
-                      disabledBorder:
-                          OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
-                      focusedBorder:
-                          OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
-                      errorBorder:
-                          OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
-                      focusedErrorBorder:
-                          OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
+                      prefixIcon: const Icon(Icons.arrow_drop_down, color: Colors.black),
+
                       prefixIconConstraints:
                           const BoxConstraints(minWidth: 50, minHeight: 25, maxWidth: 51, maxHeight: 25),
                       // errorText: Validator.validateMobile(edtMobile.text, context),
@@ -311,9 +247,6 @@ class _SignUpState extends State<SignUp> {
                         decoration: TextDecoration.underline),
                   ),
                 ),
-                const SizedBox(
-                  height: 20,
-                ),
               ],
             )
           ],
@@ -334,9 +267,9 @@ class _SignUpState extends State<SignUp> {
               children: <Widget>[
                 ListTile(
                   leading: new Icon(Icons.photo),
-                  title: new Text('Photo'),
+                  title: new Text('Cricket'),
                   onTap: () {
-                    securityController.text = "Photo";
+                    selectSecurityController.text = "Cricket";
                     Navigator.pop(context);
                   },
                 ),
@@ -344,20 +277,23 @@ class _SignUpState extends State<SignUp> {
                   leading: new Icon(Icons.music_note),
                   title: new Text('Music'),
                   onTap: () {
+                    selectSecurityController.text = "Music";
                     Navigator.pop(context);
                   },
                 ),
                 ListTile(
                   leading: new Icon(Icons.videocam),
-                  title: new Text('Video'),
+                  title: new Text('Chess'),
                   onTap: () {
+                    selectSecurityController.text = "Chess";
                     Navigator.pop(context);
                   },
                 ),
                 ListTile(
                   leading: new Icon(Icons.share),
-                  title: new Text('Share'),
+                  title: new Text('Reading'),
                   onTap: () {
+                    selectSecurityController.text = "Reading";
                     Navigator.pop(context);
                   },
                 ),

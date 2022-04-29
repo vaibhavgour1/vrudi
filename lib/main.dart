@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:vrudi/ui/splash/splash.dart';
@@ -14,7 +13,7 @@ import 'package:vrudi/ui/splash/splash.dart';
 // Dio dio = Dio(baseOptions);
 // ApiProvider apiProvider = ApiProvider();
 
-ThemeData _themeData(context) => ThemeData(
+ThemeData themeData = ThemeData(
     scaffoldBackgroundColor: Colors.white,
     splashColor: Colors.transparent,
     iconTheme: const IconThemeData(
@@ -23,8 +22,7 @@ ThemeData _themeData(context) => ThemeData(
     ),
     bottomSheetTheme: const BottomSheetThemeData(
         shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-                topRight: Radius.circular(25), topLeft: Radius.circular(25)))),
+            borderRadius: BorderRadius.only(topRight: Radius.circular(25), topLeft: Radius.circular(25)))),
     // accentTextTheme: Theme.of(context).textTheme,
     unselectedWidgetColor: Colors.black,
     fontFamily: GoogleFonts.openSans().fontFamily,
@@ -35,8 +33,14 @@ ThemeData _themeData(context) => ThemeData(
       buttonColor: Colors.red,
       textTheme: ButtonTextTheme.primary,
     ),
-    inputDecorationTheme: const InputDecorationTheme(
+    inputDecorationTheme: InputDecorationTheme(
         hoverColor: Colors.red,
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
+        enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
+        disabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
+        focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
+        errorBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
+        focusedErrorBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
 
         // filled: true,
         // fillColor: Color.fromRGBO(242, 242, 242, 1),
@@ -104,9 +108,9 @@ class _MyAppState extends State<MyApp> {
   // }
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       title: "Vrudi",
-      // theme: _themeData(context),
+      theme: themeData,
       debugShowCheckedModeBanner: false,
       home: SplashScreen(),
     );

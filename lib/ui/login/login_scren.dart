@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:vrudi/ui/home/home.dart';
 import 'package:vrudi/ui/selectfavColor/select_fav.dart';
 import 'package:vrudi/ui/signup/signup.dart';
 import 'package:vrudi/utility/validator.dart';
@@ -14,7 +15,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   TextEditingController passwordController = TextEditingController();
   // TextEditingController emailController = TextEditingController();
-  TextForm textForm = TextForm();
+  TextForm textForm = const TextForm();
   @override
   Widget build(BuildContext context) {
     double deviceWidth = MediaQuery.of(context).size.width;
@@ -59,25 +60,14 @@ class _LoginScreenState extends State<LoginScreen> {
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                     inputFormatters: [FilteringTextInputFormatter.singleLineFormatter],
                     controller: passwordController,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       filled: true,
-                      fillColor: const Color.fromRGBO(242, 242, 242, 1),
+                      fillColor: Color.fromRGBO(242, 242, 242, 1),
                       counterText: "",
                       hintText: "Please Enter Password",
-                      prefixIcon: const Icon(Icons.key, color: Colors.black),
-                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
-                      enabledBorder:
-                          OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
-                      disabledBorder:
-                          OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
-                      focusedBorder:
-                          OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
-                      errorBorder:
-                          OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
-                      focusedErrorBorder:
-                          OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
-                      prefixIconConstraints:
-                          const BoxConstraints(minWidth: 50, minHeight: 25, maxWidth: 51, maxHeight: 25),
+                      prefixIcon: Icon(Icons.key, color: Colors.black),
+
+                      prefixIconConstraints: BoxConstraints(minWidth: 50, minHeight: 25, maxWidth: 51, maxHeight: 25),
                       // errorText: Validator.validateMobile(edtMobile.text, context),
                     ),
                   ),
@@ -92,7 +82,10 @@ class _LoginScreenState extends State<LoginScreen> {
                   textColor: Colors.white,
                   color: Colors.orange,
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushAndRemoveUntil(
+                        context, MaterialPageRoute(builder: (context) => const HomeScreen()), (route) => false);
+                  },
                   child: const Text(
                     "Login",
                     style: TextStyle(fontSize: 19, fontWeight: FontWeight.w600, decoration: TextDecoration.none),

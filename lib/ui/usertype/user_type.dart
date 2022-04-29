@@ -11,9 +11,9 @@ class UserType extends StatefulWidget {
 }
 
 class _UserTypeState extends State<UserType> {
-  TextEditingController passwordController = TextEditingController();
-  // TextEditingController emailController = TextEditingController();
-  TextForm textForm = TextForm();
+  TextEditingController userTypeController = TextEditingController();
+  TextEditingController professionalController = TextEditingController();
+  TextForm textForm = const TextForm();
   @override
   Widget build(BuildContext context) {
     double deviceWidth = MediaQuery.of(context).size.width;
@@ -53,26 +53,43 @@ class _UserTypeState extends State<UserType> {
                     validator: (numb) => Validator.passwordValidator(numb!),
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                     inputFormatters: [FilteringTextInputFormatter.singleLineFormatter],
-                    controller: passwordController,
-                    decoration: InputDecoration(
+                    controller: userTypeController,
+                    decoration: const InputDecoration(
                       filled: true,
-                      fillColor: const Color.fromRGBO(242, 242, 242, 1),
+                      fillColor: Color.fromRGBO(242, 242, 242, 1),
                       counterText: "",
                       hintText: "Please Select User Type",
-                      suffixIcon: const Icon(Icons.arrow_drop_down, color: Colors.black),
-                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
-                      enabledBorder:
-                          OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
-                      disabledBorder:
-                          OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
-                      focusedBorder:
-                          OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
-                      errorBorder:
-                          OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
-                      focusedErrorBorder:
-                          OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
-                      prefixIconConstraints:
-                          const BoxConstraints(minWidth: 50, minHeight: 25, maxWidth: 51, maxHeight: 25),
+                      suffixIcon: Icon(Icons.arrow_drop_down, color: Colors.black),
+                      prefix: Text("  "),
+                      suffixIconConstraints: BoxConstraints(minWidth: 50, minHeight: 25, maxWidth: 51, maxHeight: 25),
+                      // errorText: Validator.validateMobile(edtMobile.text, context),
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Container(
+                  height: 50,
+                  padding: const EdgeInsets.symmetric(horizontal: 30),
+                  child: TextFormField(
+                    readOnly: true,
+                    onTap: () {
+                      bottomSheetProfessional();
+                    },
+                    keyboardType: TextInputType.visiblePassword,
+                    validator: (numb) => Validator.passwordValidator(numb!),
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    inputFormatters: [FilteringTextInputFormatter.singleLineFormatter],
+                    controller: professionalController,
+                    decoration: const InputDecoration(
+                      filled: true,
+                      fillColor: Color.fromRGBO(242, 242, 242, 1),
+                      counterText: "",
+                      hintText: "Please Select User Professional",
+                      suffixIcon: Icon(Icons.arrow_drop_down, color: Colors.black),
+                      prefix: Text("  "),
+                      suffixIconConstraints: BoxConstraints(minWidth: 50, minHeight: 25, maxWidth: 51, maxHeight: 25),
                       // errorText: Validator.validateMobile(edtMobile.text, context),
                     ),
                   ),
@@ -127,8 +144,8 @@ class _UserTypeState extends State<UserType> {
   void bottomSheet() {
     showModalBottomSheet(
         context: context,
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20))),
+        shape: const RoundedRectangleBorder(
+            borderRadius: const BorderRadius.only(topLeft: const Radius.circular(20), topRight: Radius.circular(20))),
         builder: (context) {
           return Container(
             child: Column(
@@ -136,30 +153,65 @@ class _UserTypeState extends State<UserType> {
               children: <Widget>[
                 ListTile(
                   leading: new Icon(Icons.photo),
-                  title: new Text('Photo'),
+                  title: new Text('Employee'),
                   onTap: () {
-                    passwordController.text = "Photo";
+                    userTypeController.text = "Employee";
                     Navigator.pop(context);
                   },
                 ),
                 ListTile(
                   leading: new Icon(Icons.music_note),
-                  title: new Text('Music'),
+                  title: new Text('Professional'),
                   onTap: () {
+                    userTypeController.text = "Professional";
                     Navigator.pop(context);
                   },
                 ),
                 ListTile(
                   leading: new Icon(Icons.videocam),
-                  title: new Text('Video'),
+                  title: new Text('Client'),
                   onTap: () {
+                    userTypeController.text = "Client";
+                    Navigator.pop(context);
+                  },
+                ),
+              ],
+            ),
+          );
+        });
+  }
+
+  void bottomSheetProfessional() {
+    showModalBottomSheet(
+        context: context,
+        shape: const RoundedRectangleBorder(
+            borderRadius: const BorderRadius.only(topLeft: const Radius.circular(20), topRight: Radius.circular(20))),
+        builder: (context) {
+          return Container(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                ListTile(
+                  leading: new Icon(Icons.photo),
+                  title: new Text('CA'),
+                  onTap: () {
+                    professionalController.text = "CA";
                     Navigator.pop(context);
                   },
                 ),
                 ListTile(
-                  leading: new Icon(Icons.share),
-                  title: new Text('Share'),
+                  leading: new Icon(Icons.music_note),
+                  title: new Text('HR'),
                   onTap: () {
+                    professionalController.text = "HR";
+                    Navigator.pop(context);
+                  },
+                ),
+                ListTile(
+                  leading: new Icon(Icons.videocam),
+                  title: new Text('IT'),
+                  onTap: () {
+                    professionalController.text = "IT";
                     Navigator.pop(context);
                   },
                 ),

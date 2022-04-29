@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:vrudi/ui/forgetpassword/forgetpassword.dart';
-import 'package:vrudi/ui/login/login_scren.dart';
-
 import 'package:vrudi/utility/validator.dart';
 
 class SelectFavScreen extends StatefulWidget {
@@ -50,40 +48,17 @@ class _SelectFavScreenState extends State<SelectFavScreen> {
                         keyboardType: TextInputType.visiblePassword,
                         validator: (numb) => Validator.passwordValidator(numb!),
                         autovalidateMode: AutovalidateMode.onUserInteraction,
-                        inputFormatters: [
-                          FilteringTextInputFormatter.singleLineFormatter
-                        ],
+                        inputFormatters: [FilteringTextInputFormatter.singleLineFormatter],
                         controller: passwordController,
                         decoration: InputDecoration(
                           filled: true,
                           fillColor: const Color.fromRGBO(242, 242, 242, 1),
                           counterText: "",
                           hintText: "Email Id",
-                          prefixIcon:
-                              const Icon(Icons.mail, color: Colors.black),
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              borderSide: BorderSide.none),
-                          enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              borderSide: BorderSide.none),
-                          disabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              borderSide: BorderSide.none),
-                          focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              borderSide: BorderSide.none),
-                          errorBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              borderSide: BorderSide.none),
-                          focusedErrorBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              borderSide: BorderSide.none),
-                          prefixIconConstraints: const BoxConstraints(
-                              minWidth: 50,
-                              minHeight: 25,
-                              maxWidth: 51,
-                              maxHeight: 25),
+                          prefixIcon: const Icon(Icons.mail, color: Colors.black),
+
+                          prefixIconConstraints:
+                              const BoxConstraints(minWidth: 50, minHeight: 25, maxWidth: 51, maxHeight: 25),
                           // errorText: Validator.validateMobile(edtMobile.text, context),
                         ),
                       ),
@@ -104,31 +79,10 @@ class _SelectFavScreenState extends State<SelectFavScreen> {
                           fillColor: const Color.fromRGBO(242, 242, 242, 1),
                           counterText: "",
                           hintText: "Select Favourite Color",
-                          prefixIcon: const Icon(Icons.arrow_drop_down,
-                              color: Colors.black),
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              borderSide: BorderSide.none),
-                          enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              borderSide: BorderSide.none),
-                          disabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              borderSide: BorderSide.none),
-                          focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              borderSide: BorderSide.none),
-                          errorBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              borderSide: BorderSide.none),
-                          focusedErrorBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              borderSide: BorderSide.none),
-                          prefixIconConstraints: const BoxConstraints(
-                              minWidth: 50,
-                              minHeight: 25,
-                              maxWidth: 51,
-                              maxHeight: 25),
+                          prefixIcon: const Icon(Icons.arrow_drop_down, color: Colors.black),
+
+                          prefixIconConstraints:
+                              const BoxConstraints(minWidth: 50, minHeight: 25, maxWidth: 51, maxHeight: 25),
                           // errorText: Validator.validateMobile(edtMobile.text, context),
                         ),
                       ),
@@ -155,16 +109,11 @@ class _SelectFavScreenState extends State<SelectFavScreen> {
         //shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         onPressed: () {
           Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(builder: (context) => const ForgetScreen()),
-              (route) => false);
+              context, MaterialPageRoute(builder: (context) => const ForgetScreen()), (route) => false);
         },
         child: const Text(
           "Done",
-          style: TextStyle(
-              fontSize: 19,
-              fontWeight: FontWeight.w600,
-              decoration: TextDecoration.none),
+          style: TextStyle(fontSize: 19, fontWeight: FontWeight.w600, decoration: TextDecoration.none),
         ),
       ),
     );
@@ -174,8 +123,7 @@ class _SelectFavScreenState extends State<SelectFavScreen> {
     showModalBottomSheet(
         context: context,
         shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(20), topRight: Radius.circular(20))),
+            borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20))),
         builder: (context) {
           return Container(
             child: Column(
