@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:vrudi/ui/drawer/drawer.dart';
@@ -11,7 +12,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final globalKey = GlobalKey<ScaffoldState>();
-  List name = ["Task", "Vault", "projects", "Products", "HRMS", "Revenues"];
+  List name = ["Task", "Vault", "Projects", "Products", "HRMS", "Revenues"];
   List<GDPData> _chartData = [];
   TooltipBehavior? _tooltipBehavior;
 
@@ -80,7 +81,7 @@ class _HomeScreenState extends State<HomeScreen> {
               GridView.builder(
                   shrinkWrap: true,
                   gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                      maxCrossAxisExtent: 150, childAspectRatio: 3 / 1.5, crossAxisSpacing: 15, mainAxisSpacing: 15),
+                      maxCrossAxisExtent: 150, childAspectRatio: 3 / 1.2, crossAxisSpacing: 15, mainAxisSpacing: 15),
                   itemCount: name.length,
                   itemBuilder: (BuildContext ctx, index) {
                     return Container(
@@ -90,7 +91,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                       ),
                       decoration: BoxDecoration(
-                        color: Colors.amber,
+                        color: Colors.yellow,
                         boxShadow: [
                           BoxShadow(
                             color: Colors.grey.shade300,
@@ -115,110 +116,313 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                   ],
                 ),
-                child: SfCircularChart(
-                  // title: ChartTitle(text: 'Continent wise GDP - 2021 \n (in billions of USD)'),
-                  legend: Legend(
-                    isVisible: true,
-                    // alignment: ChartAlignment.center,
-                    orientation: LegendItemOrientation.vertical,
-                    position: LegendPosition.right,
-                    // legendItemBuilder: (String name, dynamic series, dynamic point, int index) {
-                    //   return Container(
-                    //     height: 200,
-                    //     width: 40,
-                    //     child: Column(
-                    //       children: [
-                    //         Row(
-                    //           children: [
-                    //             Container(
-                    //               height: 30,
-                    //               width: 10,
-                    //               decoration: BoxDecoration(
-                    //                 color: Colors.yellow,
-                    //               ),
-                    //             ),
-                    //             Column(
-                    //               children: [Text("data"), Text("data")],
-                    //             ),
-                    //           ],
-                    //         ),
-                    //         Row(
-                    //           children: [
-                    //             Container(
-                    //               height: 30,
-                    //               width: 10,
-                    //               decoration: BoxDecoration(
-                    //                 color: Colors.yellow,
-                    //               ),
-                    //             ),
-                    //             Column(
-                    //               children: [Text("data"), Text("data")],
-                    //             ),
-                    //           ],
-                    //         ),
-                    //         Row(
-                    //           children: [
-                    //             Container(
-                    //               height: 30,
-                    //               width: 10,
-                    //               decoration: BoxDecoration(
-                    //                 color: Colors.yellow,
-                    //               ),
-                    //             ),
-                    //             Column(
-                    //               children: [Text("data"), Text("data")],
-                    //             ),
-                    //           ],
-                    //         ),
-                    //       ],
-                    //     ),
-                    //   );
-                    // },
-                    // legendItemBuilder: (String name, dynamic series, dynamic point, int index) {
-                    //   return Container(
-                    //       margin: EdgeInsets.only(top: 20),
-                    //       decoration: const BoxDecoration(color: Colors.red),
-                    //       width: 100,
-                    //       height: 10,
-                    //       child: Row(children: [
-                    //         Container(
-                    //           decoration: BoxDecoration(
-                    //               color: index == 0
-                    //                   ? Colors.yellow
-                    //                   : index == 1
-                    //                       ? Colors.pink.shade300
-                    //                       : index == 2
-                    //                           ? Colors.blue
-                    //                           : Colors.blue),
-                    //           width: 10,
-                    //           height: 30,
-                    //         ),
-                    //         Container(child: Text(index.toString())),
-                    //       ]));
-                    // },
-                    overflowMode: LegendItemOverflowMode.wrap,
-                    iconHeight: 25,
+                child: Row(children: [
+                  Container(
+                    width: 200,
+                    child: SfCircularChart(
+                      // title: ChartTitle(text: 'Continent wise GDP - 2021 \n (in billions of USD)'),
+                      // legend: Legend(
+                      //   isVisible: true,
+                      //   // alignment: ChartAlignment.center,
+                      //   orientation: LegendItemOrientation.vertical,
+                      //   position: LegendPosition.right,
+                      //   // legendItemBuilder: (String name, dynamic series, dynamic point, int index) {
+                      //   //   return Container(
+                      //   //     height: 200,
+                      //   //     width: 40,
+                      //   //     child: Column(
+                      //   //       children: [
+                      //   //         Row(
+                      //   //           children: [
+                      //   //             Container(
+                      //   //               height: 30,
+                      //   //               width: 10,
+                      //   //               decoration: BoxDecoration(
+                      //   //                 color: Colors.yellow,
+                      //   //               ),
+                      //   //             ),
+                      //   //             Column(
+                      //   //               children: [Text("data"), Text("data")],
+                      //   //             ),
+                      //   //           ],
+                      //   //         ),
+                      //   //         Row(
+                      //   //           children: [
+                      //   //             Container(
+                      //   //               height: 30,
+                      //   //               width: 10,
+                      //   //               decoration: BoxDecoration(
+                      //   //                 color: Colors.yellow,
+                      //   //               ),
+                      //   //             ),
+                      //   //             Column(
+                      //   //               children: [Text("data"), Text("data")],
+                      //   //             ),
+                      //   //           ],
+                      //   //         ),
+                      //   //         Row(
+                      //   //           children: [
+                      //   //             Container(
+                      //   //               height: 30,
+                      //   //               width: 10,
+                      //   //               decoration: BoxDecoration(
+                      //   //                 color: Colors.yellow,
+                      //   //               ),
+                      //   //             ),
+                      //   //             Column(
+                      //   //               children: [Text("data"), Text("data")],
+                      //   //             ),
+                      //   //           ],
+                      //   //         ),
+                      //   //       ],
+                      //   //     ),
+                      //   //   );
+                      //   // },
+                      //   // legendItemBuilder: (String name, dynamic series, dynamic point, int index) {
+                      //   //   return Container(
+                      //   //       margin: EdgeInsets.only(top: 20),
+                      //   //       decoration: const BoxDecoration(color: Colors.red),
+                      //   //       width: 100,
+                      //   //       height: 10,
+                      //   //       child: Row(children: [
+                      //   //         Container(
+                      //   //           decoration: BoxDecoration(
+                      //   //               color: index == 0
+                      //   //                   ? Colors.yellow
+                      //   //                   : index == 1
+                      //   //                       ? Colors.pink.shade300
+                      //   //                       : index == 2
+                      //   //                           ? Colors.blue
+                      //   //                           : Colors.blue),
+                      //   //           width: 10,
+                      //   //           height: 30,
+                      //   //         ),
+                      //   //         Container(child: Text(index.toString())),
+                      //   //       ]));
+                      //   // },
+                      //   overflowMode: LegendItemOverflowMode.wrap,
+                      //   iconHeight: 25,
+                      // ),
+                      // tooltipBehavior: _tooltipBehavior,
+                      palette: [Colors.pink.shade300, Colors.yellow, Colors.blue],
+                      margin: const EdgeInsets.all(0),
+
+                      series: <CircularSeries>[
+                        DoughnutSeries<GDPData, String>(
+                          dataSource: _chartData,
+                          xValueMapper: (GDPData data, _) => data.continent,
+                          yValueMapper: (GDPData data, _) => data.gdp,
+                          //  dataLabelSettings: DataLabelSettings(isVisible: true),
+                          enableTooltip: true,
+                        )
+                      ],
+                    ),
                   ),
-                  // tooltipBehavior: _tooltipBehavior,
-                  palette: [Colors.pink.shade300, Colors.yellow, Colors.blue],
-                  series: <CircularSeries>[
-                    DoughnutSeries<GDPData, String>(
-                      dataSource: _chartData,
-                      xValueMapper: (GDPData data, _) => data.continent,
-                      yValueMapper: (GDPData data, _) => data.gdp,
-                      //  dataLabelSettings: DataLabelSettings(isVisible: true),
-                      enableTooltip: true,
-                    )
-                  ],
-                ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Row(
+                        children: [
+                          Container(
+                            height: 40,
+                            width: 10,
+                            decoration: BoxDecoration(
+                              color: Colors.yellow,
+                              borderRadius: BorderRadius.circular(24),
+                            ),
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text(
+                                " Prospective",
+                                style: const TextStyle(fontWeight: FontWeight.w700),
+                              ),
+                              const Text(
+                                " \u20B9 5,00,000.00",
+                                style: const TextStyle(fontWeight: FontWeight.w700),
+                              )
+                            ],
+                          )
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Container(
+                            height: 40,
+                            width: 10,
+                            decoration: BoxDecoration(
+                              color: Colors.pink.shade300,
+                              borderRadius: BorderRadius.circular(24),
+                            ),
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text(
+                                " Acccrued",
+                                style: const TextStyle(fontWeight: FontWeight.w700),
+                              ),
+                              const Text(
+                                " \u20B9 1,20,000.00",
+                                style: const TextStyle(fontWeight: FontWeight.w700),
+                              )
+                            ],
+                          )
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Container(
+                            height: 40,
+                            width: 10,
+                            decoration: BoxDecoration(
+                              color: Colors.blue,
+                              borderRadius: BorderRadius.circular(24),
+                            ),
+                          ),
+                          Column(
+                            // mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                " Received",
+                                style: const TextStyle(fontWeight: FontWeight.w700),
+                              ),
+                              Text(
+                                " \u20B9 2,15,000.00",
+                                style: const TextStyle(fontWeight: FontWeight.w700),
+                              )
+                            ],
+                          )
+                        ],
+                      ),
+                    ],
+                  )
+                ]),
+              ),
+              SizedBox(
+                height: 10,
               ),
               Container(
+                padding: EdgeInsets.all(10),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
                   color: Colors.white,
                   boxShadow: const [
                     BoxShadow(color: Colors.grey, offset: Offset(0.0, 0.0), blurRadius: 5 //(x,y)
                         ),
+                  ],
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Column(
+                      children: [
+                        Text(
+                          "To Do",
+                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                        ),
+                        MaterialButton(
+                          color: Colors.yellow,
+                          child: Text(
+                            "25",
+                            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 25),
+                          ),
+                          onPressed: () {},
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                        )
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        Text(
+                          "In Progress",
+                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                        ),
+                        MaterialButton(
+                          color: Colors.pink.shade300,
+                          child: Text(
+                            "15",
+                            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 25),
+                          ),
+                          onPressed: () {},
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                        )
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        Text(
+                          "Completed",
+                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                        ),
+                        MaterialButton(
+                          color: Colors.blue,
+                          child: Text(
+                            "58",
+                            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 25),
+                          ),
+                          onPressed: () {},
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                        )
+                      ],
+                    )
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Container(
+                padding: EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  color: Colors.white,
+                  boxShadow: const [
+                    BoxShadow(color: Colors.grey, offset: Offset(0.0, 0.0), blurRadius: 5 //(x,y)
+                        ),
+                  ],
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Column(
+                      children: [
+                        Text(
+                          "Absent",
+                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                        ),
+                        Text(
+                          "4",
+                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
+                        ),
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        Text(
+                          "present",
+                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                        ),
+                        Text(
+                          "6",
+                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
+                        ),
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        Text(
+                          "Half day",
+                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                        ),
+                        Text(
+                          "2",
+                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
+                        ),
+                      ],
+                    )
                   ],
                 ),
               )
