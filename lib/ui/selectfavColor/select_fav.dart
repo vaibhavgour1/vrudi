@@ -109,7 +109,7 @@ class _SelectFavScreenState extends State<SelectFavScreen> {
         //shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         onPressed: () {
           Navigator.pushAndRemoveUntil(
-              context, MaterialPageRoute(builder: (context) => const ForgetScreen()), (route) => false);
+              context, MaterialPageRoute(builder: (context) => const ForgetScreen()), (route) => true);
         },
         child: const Text(
           "Done",

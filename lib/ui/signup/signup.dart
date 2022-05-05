@@ -223,7 +223,7 @@ class _SignUpState extends State<SignUp> {
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                   onPressed: () {
                     Navigator.pushAndRemoveUntil(
-                        context, MaterialPageRoute(builder: (context) => const UserType()), (route) => false);
+                        context, MaterialPageRoute(builder: (context) => const UserType()), (route) => true);
                   },
                   child: const Text(
                     "Next",

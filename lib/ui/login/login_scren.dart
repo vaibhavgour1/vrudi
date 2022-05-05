@@ -14,6 +14,7 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   TextEditingController passwordController = TextEditingController();
+
   // TextEditingController emailController = TextEditingController();
   TextForm textForm = const TextForm();
   @override
@@ -84,7 +85,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                   onPressed: () {
                     Navigator.pushAndRemoveUntil(
-                        context, MaterialPageRoute(builder: (context) => const HomeScreen()), (route) => false);
+                        context, MaterialPageRoute(builder: (context) => const HomeScreen()), (route) => true);
                   },
                   child: const Text(
                     "Login",
@@ -97,7 +98,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 InkWell(
                   onTap: () {
                     Navigator.pushAndRemoveUntil(
-                        context, MaterialPageRoute(builder: (context) => const SelectFavScreen()), (route) => false);
+                        context, MaterialPageRoute(builder: (context) => const SelectFavScreen()), (route) => true);
                   },
                   child: const Text(
                     "Forget PassWord?",
@@ -114,7 +115,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 InkWell(
                   onTap: () {
                     Navigator.pushAndRemoveUntil(
-                        context, MaterialPageRoute(builder: (context) => const SignUp()), (route) => false);
+                        context, MaterialPageRoute(builder: (context) => const SignUp()), (route) => true);
                   },
                   child: const Text(
                     "Sign Up",

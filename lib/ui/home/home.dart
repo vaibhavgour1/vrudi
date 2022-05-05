@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:vrudi/ui/drawer/drawer.dart';
+import 'package:vrudi/ui/employeform/employe_form.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -66,7 +67,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 color: Colors.blue,
               )),
           IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushAndRemoveUntil(
+                    context, MaterialPageRoute(builder: (context) => const EmployeeForm()), (route) => true);
+              },
               icon: const Icon(
                 Icons.person,
                 color: Colors.blue,
