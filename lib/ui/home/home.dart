@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:vrudi/ui/clientinputform/client_form.dart';
 import 'package:vrudi/ui/drawer/drawer.dart';
 import 'package:vrudi/ui/employeform/employe_form.dart';
 
@@ -61,7 +62,10 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: Colors.white,
         actions: [
           IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushAndRemoveUntil(
+                    context, MaterialPageRoute(builder: (context) => const ClientForm()), (route) => true);
+              },
               icon: const Icon(
                 Icons.notifications,
                 color: Colors.blue,
