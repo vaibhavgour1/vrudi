@@ -4,6 +4,7 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:vrudi/ui/clientinputform/client_form.dart';
 import 'package:vrudi/ui/drawer/drawer.dart';
 import 'package:vrudi/ui/employeform/employe_form.dart';
+import 'package:vrudi/ui/usetemplate/use_template.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -92,22 +93,31 @@ class _HomeScreenState extends State<HomeScreen> {
                       maxCrossAxisExtent: 150, childAspectRatio: 3 / 1.2, crossAxisSpacing: 15, mainAxisSpacing: 15),
                   itemCount: name.length,
                   itemBuilder: (BuildContext ctx, index) {
-                    return Container(
-                      alignment: Alignment.center,
-                      child: Text(
-                        name[index],
-                        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-                      ),
-                      decoration: BoxDecoration(
-                        color: Colors.yellow,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.shade300,
-                            offset: const Offset(0.0, 0.0), //(x,y)
-                            blurRadius: 2.0,
-                          ),
-                        ],
-                        borderRadius: BorderRadius.circular(20),
+                    return InkWell(
+                      onTap: () {
+                        index == 0
+                            ? Navigator.pushAndRemoveUntil(
+                                context, MaterialPageRoute(builder: (context) => const UseTemplate()), (route) => true)
+                            : Navigator.pushAndRemoveUntil(
+                                context, MaterialPageRoute(builder: (context) => const UseTemplate()), (route) => true);
+                      },
+                      child: Container(
+                        alignment: Alignment.center,
+                        child: Text(
+                          name[index],
+                          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                        ),
+                        decoration: BoxDecoration(
+                          color: Colors.yellow,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.shade300,
+                              offset: const Offset(0.0, 0.0), //(x,y)
+                              blurRadius: 2.0,
+                            ),
+                          ],
+                          borderRadius: BorderRadius.circular(20),
+                        ),
                       ),
                     );
                   }),
