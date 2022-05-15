@@ -4,6 +4,7 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:vrudi/ui/clientinputform/client_form.dart';
 import 'package:vrudi/ui/drawer/drawer.dart';
 import 'package:vrudi/ui/employeform/employe_form.dart';
+import 'package:vrudi/ui/hrmsDetail/hrmshome.dart';
 import 'package:vrudi/ui/usetemplate/use_template.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -98,6 +99,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         index == 0
                             ? Navigator.pushAndRemoveUntil(
                                 context, MaterialPageRoute(builder: (context) => const UseTemplate()), (route) => true)
+                            :index == 4? Navigator.pushAndRemoveUntil(
+                            context, MaterialPageRoute(builder: (context) =>  HrmsHome()), (route) => true)
                             : Navigator.pushAndRemoveUntil(
                                 context, MaterialPageRoute(builder: (context) => const UseTemplate()), (route) => true);
                       },

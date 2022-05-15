@@ -16,6 +16,7 @@ import 'package:vrudi/ui/splash/splash.dart';
 ThemeData themeData = ThemeData(
     scaffoldBackgroundColor: Colors.white,
     splashColor: Colors.transparent,
+  dividerColor: Colors.transparent,
     iconTheme: const IconThemeData(
       color: Colors.red,
       opacity: 1,
