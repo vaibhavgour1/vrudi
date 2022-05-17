@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 import 'package:vrudi/ui/home/home.dart';
+import 'package:vrudi/ui/login/provider/login_view_model.dart';
 import 'package:vrudi/ui/selectfavColor/select_fav.dart';
 import 'package:vrudi/ui/signup/signup.dart';
 import 'package:vrudi/utility/validator.dart';
@@ -14,14 +16,22 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   TextEditingController passwordController = TextEditingController();
-
+  LoginViewModel _loginViewModel = LoginViewModel();
   // TextEditingController emailController = TextEditingController();
   TextForm textForm = const TextForm();
+  @override
+  void initState() {
+    // TODO: implement initState
+    final provider = Provider.of<LoginViewModel>(context, listen: false);
+    _loginViewModel = provider;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     double deviceWidth = MediaQuery.of(context).size.width;
     double deviceHeight = MediaQuery.of(context).size.height;
-
+    final provider = Provider.of<LoginViewModel>(context);
     return Scaffold(
         body: SingleChildScrollView(
       child: Container(
@@ -83,7 +93,14 @@ class _LoginScreenState extends State<LoginScreen> {
                   textColor: Colors.white,
                   color: Colors.orange,
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                  onPressed: () {
+                  onPressed: () async {
+                    await context.read<LoginViewModel>().login();
+                    //  await _loginViewModel.login();
+                    //LoginResponse res = context.watch<LoginViewModel>().result!;
+                    // setState(() {});
+                    //passwordController.text = res.fullName;
+                    // LoginResponse ra = context.watch<LoginViewModel>().result!;
+                    // log("${ra.toString()}");
                     Navigator.pushAndRemoveUntil(
                         context, MaterialPageRoute(builder: (context) => const HomeScreen()), (route) => true);
                   },

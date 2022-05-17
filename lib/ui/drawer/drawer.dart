@@ -1,6 +1,8 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:vrudi/ui/clientinputform/client_form.dart';
+import 'package:vrudi/ui/employeList/employee_list.dart';
 
 class AppDrawer extends StatefulWidget {
   @override
@@ -87,21 +89,21 @@ class _AppDrawerState extends State<AppDrawer> {
           child: ListView(
             children: [
               Container(
-                padding: EdgeInsets.fromLTRB(0, 20, 0, 10),
+                padding: const EdgeInsets.fromLTRB(0, 20, 0, 10),
                 child: Column(children: [
                   Image.asset("assets/images/bg.jpg", width: 170, height: 170),
-                  SizedBox(
+                  const SizedBox(
                     height: 15,
                   ),
                   Text(
                     "$name",
-                    style: TextStyle(color: Colors.red, fontSize: 20, fontWeight: FontWeight.bold),
+                    style: const TextStyle(color: Colors.red, fontSize: 20, fontWeight: FontWeight.bold),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   Text("+91 $mobile",
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.red,
                         fontSize: 16,
                       ))
@@ -109,12 +111,13 @@ class _AppDrawerState extends State<AppDrawer> {
               ),
 
               Container(
-                decoration: BoxDecoration(
-                  border: Border(bottom: BorderSide(width: 0.7, color: Color(0xffcdcdcd))),
+                decoration: const BoxDecoration(
+                  border: const Border(bottom: const BorderSide(width: 0.7, color: Color(0xffcdcdcd))),
                 ),
                 child: ListTile(
                   leading: Container(width: 20, child: Image.asset('assets/images/bg.jpg')),
-                  title: Text("Home", style: TextStyle(color: Colors.black, fontSize: 15, fontWeight: FontWeight.w600)),
+                  title: const Text("My Profile",
+                      style: const TextStyle(color: Colors.black, fontSize: 15, fontWeight: FontWeight.w600)),
                   onTap: () {
                     Navigator.pop(context);
                     //   Navigator.pushAndRemoveUntil(
@@ -124,29 +127,67 @@ class _AppDrawerState extends State<AppDrawer> {
               ),
 
               Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
+                  border: Border(bottom: const BorderSide(width: 0.7, color: Color(0xffcdcdcd))),
+                ),
+                child: ListTile(
+                  leading: Container(width: 20, child: Image.asset('assets/images/bg.jpg', width: 20)),
+                  title: const Text("Client",
+                      style: TextStyle(color: Colors.black, fontSize: 15, fontWeight: FontWeight.w600)),
+                  onTap: () {
+                    Navigator.pop(context);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const ClientForm()),
+                    );
+                  },
+                ),
+              ),
+              Container(
+                decoration: const BoxDecoration(
+                  border: Border(bottom: const BorderSide(width: 0.7, color: Color(0xffcdcdcd))),
+                ),
+                child: ListTile(
+                  leading: Container(width: 20, child: Image.asset('assets/images/bg.jpg', width: 20)),
+                  title: const Text("Employee",
+                      style: const TextStyle(color: Colors.black, fontSize: 15, fontWeight: FontWeight.w600)),
+                  onTap: () {
+                    Navigator.pop(context);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => EmployeList()),
+                    );
+                  },
+                ),
+              ),
+              Container(
+                decoration: const BoxDecoration(
                   border: Border(bottom: BorderSide(width: 0.7, color: Color(0xffcdcdcd))),
                 ),
                 child: ListTile(
                   leading: Container(width: 20, child: Image.asset('assets/images/bg.jpg', width: 20)),
-                  title:
-                      Text("Script", style: TextStyle(color: Colors.black, fontSize: 15, fontWeight: FontWeight.w600)),
+                  title: const Text("Setting",
+                      style: const TextStyle(color: Colors.black, fontSize: 15, fontWeight: FontWeight.w600)),
                   onTap: () {
                     Navigator.pop(context);
                     // Navigator.push(
                     //   context,
-                    //   MaterialPageRoute(builder: (context) => Scripts()),
+                    //   MaterialPageRoute(
+                    //       builder: (context) => WebViewScreen(
+                    //         title: "Privacy Policy",
+                    //         url: "http://employee.myprofitinc.com/aboutus",
+                    //       )),
                     // );
                   },
                 ),
               ),
               Container(
-                decoration: BoxDecoration(
-                  border: Border(bottom: BorderSide(width: 0.7, color: Color(0xffcdcdcd))),
+                decoration: const BoxDecoration(
+                  border: const Border(bottom: const BorderSide(width: 0.7, color: Color(0xffcdcdcd))),
                 ),
                 child: ListTile(
                   leading: Container(width: 20, child: Image.asset('assets/images/bg.jpg', width: 20)),
-                  title: Text("About Us",
+                  title: const Text("Support",
                       style: TextStyle(color: Colors.black, fontSize: 15, fontWeight: FontWeight.w600)),
                   onTap: () {
                     Navigator.pop(context);
@@ -195,12 +236,12 @@ class _AppDrawerState extends State<AppDrawer> {
               //   ),
               // ),
               Container(
-                decoration: BoxDecoration(
-                  border: Border(bottom: BorderSide(width: 0.7, color: Color(0xffcdcdcd))),
+                decoration: const BoxDecoration(
+                  border: const Border(bottom: BorderSide(width: 0.7, color: Color(0xffcdcdcd))),
                 ),
                 child: ListTile(
                   leading: Container(width: 20, child: Image.asset('assets/images/bg.jpg', width: 20)),
-                  title: Text("Logout",
+                  title: const Text("Logout",
                       style:
                           TextStyle(color: Color.fromRGBO(249, 45, 40, 1), fontSize: 15, fontWeight: FontWeight.w600)),
                   onTap: () {

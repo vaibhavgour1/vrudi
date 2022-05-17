@@ -1,11 +1,12 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
-import 'package:vrudi/ui/clientinputform/client_form.dart';
 import 'package:vrudi/ui/drawer/drawer.dart';
-import 'package:vrudi/ui/employeform/employe_form.dart';
 import 'package:vrudi/ui/hrmsDetail/hrmshome.dart';
-import 'package:vrudi/ui/usetemplate/use_template.dart';
+import 'package:vrudi/ui/newanduseproject/new_project_template.dart';
+import 'package:vrudi/ui/tasklist/task_list.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -64,19 +65,13 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: Colors.white,
         actions: [
           IconButton(
-              onPressed: () {
-                Navigator.pushAndRemoveUntil(
-                    context, MaterialPageRoute(builder: (context) => const ClientForm()), (route) => true);
-              },
+              onPressed: () {},
               icon: const Icon(
                 Icons.notifications,
                 color: Colors.blue,
               )),
           IconButton(
-              onPressed: () {
-                Navigator.pushAndRemoveUntil(
-                    context, MaterialPageRoute(builder: (context) => const EmployeeForm()), (route) => true);
-              },
+              onPressed: () {},
               icon: const Icon(
                 Icons.person,
                 color: Colors.blue,
@@ -96,13 +91,18 @@ class _HomeScreenState extends State<HomeScreen> {
                   itemBuilder: (BuildContext ctx, index) {
                     return InkWell(
                       onTap: () {
+                        log("$index");
                         index == 0
                             ? Navigator.pushAndRemoveUntil(
-                                context, MaterialPageRoute(builder: (context) => const UseTemplate()), (route) => true)
-                            :index == 4? Navigator.pushAndRemoveUntil(
-                            context, MaterialPageRoute(builder: (context) =>  HrmsHome()), (route) => true)
-                            : Navigator.pushAndRemoveUntil(
-                                context, MaterialPageRoute(builder: (context) => const UseTemplate()), (route) => true);
+                                context, MaterialPageRoute(builder: (context) => const TaskList()), (route) => true)
+                            : index == 2
+                                ? Navigator.pushAndRemoveUntil(context,
+                                    MaterialPageRoute(builder: (context) => const NewProject()), (route) => true)
+                                : index == 4
+                                    ? Navigator.pushAndRemoveUntil(
+                                        context, MaterialPageRoute(builder: (context) => HrmsHome()), (route) => true)
+                                    : Navigator.pushAndRemoveUntil(context,
+                                        MaterialPageRoute(builder: (context) => const TaskList()), (route) => true);
                       },
                       child: Container(
                         alignment: Alignment.center,

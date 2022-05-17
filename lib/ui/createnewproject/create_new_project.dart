@@ -290,11 +290,12 @@ class _CreateNewProjectState extends State<CreateNewProject> {
             color: Colors.orange,
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
             onPressed: () {
-              Navigator.pushAndRemoveUntil(
-                  context, MaterialPageRoute(builder: (context) => const HomeScreen()), (route) => true);
+              Navigator.pop(context);
+              // Navigator.pushAndRemoveUntil(
+              //     context, MaterialPageRoute(builder: (context) => const HomeScreen()), (route) => true);
             },
             child: const Text(
-              "Login",
+              "Create Project",
               style: TextStyle(fontSize: 19, fontWeight: FontWeight.w600, decoration: TextDecoration.none),
             ),
           ),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:vrudi/ui/newanduseproject/new_project_template.dart';
+import 'package:vrudi/ui/tasklist/task_list.dart';
 
 class AddTask extends StatefulWidget {
   const AddTask({Key? key}) : super(key: key);
@@ -113,7 +113,7 @@ class _AddTaskState extends State<AddTask> {
             child: MaterialButton(
               onPressed: () {
                 Navigator.pushAndRemoveUntil(
-                    context, MaterialPageRoute(builder: (context) => const NewProject()), (route) => false);
+                    context, MaterialPageRoute(builder: (context) => const TaskList()), (route) => true);
               },
               color: Colors.orange,
               height: 50,

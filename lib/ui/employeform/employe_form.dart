@@ -596,7 +596,9 @@ class _EmployeeFormState extends State<EmployeeForm> {
         ),
       ),
       bottomNavigationBar: MaterialButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pop(context);
+        },
         color: Colors.orange,
         height: 50,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),

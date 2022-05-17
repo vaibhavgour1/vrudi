@@ -1,22 +1,27 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+import 'package:vrudi/api/api_provider.dart';
+import 'package:vrudi/api/endpoints.dart';
+import 'package:vrudi/ui/login/provider/login_view_model.dart';
 import 'package:vrudi/ui/splash/splash.dart';
 
-// BaseOptions baseOptions = BaseOptions(
-//   baseUrl: Endpoint.BASE_URL,
-//   receiveTimeout: 60000,
-//   sendTimeout: 60000,
-//   responseType: ResponseType.json,
-//   maxRedirects: 3,
-// );
-// Dio dio = Dio(baseOptions);
-// ApiProvider apiProvider = ApiProvider();
+BaseOptions baseOptions = BaseOptions(
+  baseUrl: Endpoint.BASE_URL,
+  receiveTimeout: 60000,
+  sendTimeout: 60000,
+  responseType: ResponseType.json,
+  maxRedirects: 3,
+);
+Dio dio = Dio(baseOptions);
+ApiProvider apiProvider = ApiProvider();
 
 ThemeData themeData = ThemeData(
     scaffoldBackgroundColor: Colors.white,
     splashColor: Colors.transparent,
-  dividerColor: Colors.transparent,
+    dividerColor: Colors.transparent,
     iconTheme: const IconThemeData(
       color: Colors.red,
       opacity: 1,
@@ -88,7 +93,9 @@ void main() {
   //     logPrint: (text) {
   //       log(text.toString());
   //     }));
-  runApp(const MyApp());
+  runApp(MultiProvider(providers: [
+    ChangeNotifierProvider(create: (_) => LoginViewModel()),
+  ], child: const MyApp()));
 }
 
 class MyApp extends StatefulWidget {

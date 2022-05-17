@@ -46,6 +46,7 @@ dependencies:
   #api calling
   dio:
   http:
+  provider:
   #app fonts
   google_fonts:
   #page transiction effects

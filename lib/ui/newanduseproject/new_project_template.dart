@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vrudi/ui/createnewproject/create_new_project.dart';
-import 'package:vrudi/ui/tasklist/task_list.dart';
+import 'package:vrudi/ui/usetemplate/use_template.dart';
 
 class NewProject extends StatefulWidget {
   const NewProject({Key? key}) : super(key: key);
@@ -22,7 +22,7 @@ class _NewProjectState extends State<NewProject> {
               MaterialButton(
                 onPressed: () {
                   Navigator.pushAndRemoveUntil(
-                      context, MaterialPageRoute(builder: (context) => const TaskList()), (route) => true);
+                      context, MaterialPageRoute(builder: (context) => const CreateNewProject()), (route) => true);
                 },
                 color: Colors.orange,
                 height: 50,
@@ -38,7 +38,7 @@ class _NewProjectState extends State<NewProject> {
               MaterialButton(
                 onPressed: () {
                   Navigator.pushAndRemoveUntil(
-                      context, MaterialPageRoute(builder: (context) => const CreateNewProject()), (route) => true);
+                      context, MaterialPageRoute(builder: (context) => const UseTemplate()), (route) => true);
                 },
                 color: Colors.orange,
                 height: 50,
