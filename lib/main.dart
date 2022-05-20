@@ -2,10 +2,8 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'package:vrudi/api/api_provider.dart';
 import 'package:vrudi/api/endpoints.dart';
-import 'package:vrudi/ui/login/provider/login_view_model.dart';
 import 'package:vrudi/ui/splash/splash.dart';
 
 BaseOptions baseOptions = BaseOptions(
@@ -93,9 +91,7 @@ void main() {
   //     logPrint: (text) {
   //       log(text.toString());
   //     }));
-  runApp(MultiProvider(providers: [
-    ChangeNotifierProvider(create: (_) => LoginViewModel()),
-  ], child: const MyApp()));
+  runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget {
