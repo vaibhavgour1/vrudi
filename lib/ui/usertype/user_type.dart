@@ -13,7 +13,7 @@ class UserType extends StatefulWidget {
 class _UserTypeState extends State<UserType> {
   TextEditingController userTypeController = TextEditingController();
   TextEditingController professionalController = TextEditingController();
-  TextForm textForm = const TextForm();
+
   @override
   Widget build(BuildContext context) {
     double deviceWidth = MediaQuery.of(context).size.width;

@@ -14,7 +14,7 @@ class ApiProvider {
     return apiProvider;
   }
 
-  Future<LoginResponse> login() async {
+  Future<LoginResponse> login(Map<String, dynamic> input) async {
     Response res = await dio.post(Endpoint.LOGIN, data: {"userId": "vaibhav", "password": "test#123"});
     log("$res");
     return LoginResponse.fromJson(res.toString());

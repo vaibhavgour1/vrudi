@@ -51,7 +51,15 @@ dependencies:
   google_fonts:
   #page transiction effects
   page_transition:
-
+  #toast msg
+  fluttertoast: ^8.0.8
+  equatable:
+  #internet connection
+  connectivity:
+  #LOADER
+  flutter_easyloading:
+  #bloc architecture
+  flutter_bloc: 7.3.3
 
 dev_dependencies:
   flutter_test:
