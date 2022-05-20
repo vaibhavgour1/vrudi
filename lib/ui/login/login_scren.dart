@@ -94,7 +94,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   color: Colors.orange,
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                   onPressed: () async {
-                    await context.read<LoginViewModel>().login();
+                    //await context.read<LoginViewModel>().login();
                     //  await _loginViewModel.login();
                     //LoginResponse res = context.watch<LoginViewModel>().result!;
                     // setState(() {});
