@@ -1,3 +1,5 @@
+
+
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
@@ -6,10 +8,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:vrudi/ui/home/home.dart';
 import 'package:vrudi/ui/login/login_bloc.dart';
+import 'package:vrudi/ui/login/login_event.dart';
+import 'package:vrudi/ui/login/login_state.dart';
 import 'package:vrudi/ui/selectfavColor/select_fav.dart';
 import 'package:vrudi/ui/signup/signup.dart';
 import 'package:vrudi/utility/colors.dart';
 import 'package:vrudi/utility/sharedpref.dart';
+import 'package:vrudi/utility/utilty.dart';
 import 'package:vrudi/utility/validator.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -27,27 +32,24 @@ class _LoginScreenState extends State<LoginScreen> {
   // TextEditingController emailController = TextEditingController();
 
   loginApiCall(username, password) async {
-    // if (username.isEmpty) {
-    //   Fluttertoast.showToast(
-    //     msg: "Please Enter userName",
-    //     textColor: Colors.white,
-    //     backgroundColor: ColorPrimary,
-    //   );
-    //   Utility.showToast(msg: "Please Enter userName");
-    // } else if (password.length >= 2) {
-    //   Fluttertoast.showToast(
-    //     msg: "Please Enter userName",
-    //     textColor: Colors.white,
-    //     backgroundColor: ColorPrimary,
-    //   );
-    // } else {
+    if (username.isEmpty) {
+
+      Utility.showToast(msg: "Please Enter userName");
+    } else
+
+      if (password.length <= 2) {
+        Utility.showToast(msg: "Please Enter Password");
+
+    } else {
+        log("===>$username");
+        log("===>$password");
     Map<String, dynamic> loginInput = Map<String, dynamic>();
     loginInput["userId"] = username;
     loginInput["password"] = password;
     log("===>$username");
     log("===>$loginInput");
     loginBloc.add(GetLoginEvent(input: loginInput));
-    // }
+    }
   }
 
   @override
@@ -68,7 +70,7 @@ class _LoginScreenState extends State<LoginScreen> {
       child: BlocConsumer<LoginBloc, LoginState>(
         bloc: loginBloc,
         listener: (context, state) async {
-          int status = await SharedPref.getIntegerPreference(SharedPref.USERSTATUS);
+log("===>$state");
           if (state is GetLoginState) {
             Navigator.pushAndRemoveUntil(
                 context, MaterialPageRoute(builder: (context) => const HomeScreen()), (route) => true);

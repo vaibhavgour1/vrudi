@@ -3,4 +3,7 @@ class Endpoint {
   // http://vendor.myprofitinc.com/
   static const String BASE_URL = "https://vrudi.azurewebsites.net/api/";
   static const String LOGIN = "Accounts/Authenticate";
+  static const String SIGNUP = "Accounts";
+  static const String FORGETPASSWORD = "Accounts/ForgotPassword";
+  static const String RESETPASSWORD = "Accounts/ResetPassword";
 }

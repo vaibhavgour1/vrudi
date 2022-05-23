@@ -9,14 +9,14 @@ class LoginInitialState extends LoginState {
 
 class GetLoginState extends LoginState {
   final message;
-  GetLoginState(this.message);
+  GetLoginState({required this.message});
 
   @override
   List<Object> get props => [message];
 }
 
 class LoadingState extends LoginState {
-  LoadingState();
+
   @override
   List<Object?> get props => [];
 }

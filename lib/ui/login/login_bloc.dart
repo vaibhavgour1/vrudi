@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:developer';
-
 import 'package:bloc/bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:vrudi/main.dart';
@@ -28,7 +27,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       LoginResponse result = await apiProvider.login(input);
       EasyLoading.dismiss();
       log("$result");
-      if (result.hasErrors) {
+      if (result.hasErrors == false) {
+        yield GetLoginState(message: result.message);
       } else {
         yield GetLoginFailureState(message: result.message);
       }
