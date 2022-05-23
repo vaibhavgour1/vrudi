@@ -1,5 +1,3 @@
-
-
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
@@ -13,7 +11,6 @@ import 'package:vrudi/ui/login/login_state.dart';
 import 'package:vrudi/ui/selectfavColor/select_fav.dart';
 import 'package:vrudi/ui/signup/signup.dart';
 import 'package:vrudi/utility/colors.dart';
-import 'package:vrudi/utility/sharedpref.dart';
 import 'package:vrudi/utility/utilty.dart';
 import 'package:vrudi/utility/validator.dart';
 
@@ -33,22 +30,15 @@ class _LoginScreenState extends State<LoginScreen> {
 
   loginApiCall(username, password) async {
     if (username.isEmpty) {
-
       Utility.showToast(msg: "Please Enter userName");
-    } else
-
-      if (password.length <= 2) {
-        Utility.showToast(msg: "Please Enter Password");
-
+    } else if (password.isEmpty) {
+      Utility.showToast(msg: "Please Enter Password");
     } else {
-        log("===>$username");
-        log("===>$password");
-    Map<String, dynamic> loginInput = Map<String, dynamic>();
-    loginInput["userId"] = username;
-    loginInput["password"] = password;
-    log("===>$username");
-    log("===>$loginInput");
-    loginBloc.add(GetLoginEvent(input: loginInput));
+      Map<String, dynamic> loginInput = Map<String, dynamic>();
+      loginInput["userId"] = username;
+      loginInput["password"] = password;
+
+      loginBloc.add(GetLoginEvent(input: loginInput));
     }
   }
 
@@ -70,7 +60,7 @@ class _LoginScreenState extends State<LoginScreen> {
       child: BlocConsumer<LoginBloc, LoginState>(
         bloc: loginBloc,
         listener: (context, state) async {
-log("===>$state");
+          log("===>$state");
           if (state is GetLoginState) {
             Navigator.pushAndRemoveUntil(
                 context, MaterialPageRoute(builder: (context) => const HomeScreen()), (route) => true);
@@ -81,6 +71,10 @@ log("===>$state");
               textColor: Colors.white,
               backgroundColor: ColorPrimary,
             );
+          }
+          if (state is LoginInitialState) {
+            Container(
+                height: MediaQuery.of(context).size.height * 0.70, child: Center(child: CircularProgressIndicator()));
           }
         },
         builder: (context, state) {
@@ -173,7 +167,6 @@ log("===>$state");
                         color: Colors.orange,
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                         onPressed: () async {
-                          log("===>");
                           loginApiCall(usernameController.text, passwordController.text);
                         },
                         child: const Text(

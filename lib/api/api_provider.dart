@@ -25,17 +25,13 @@ class ApiProvider {
   }
 
   Future<SignUpResponse> signup(Map<String, dynamic> input) async {
-    Response res = await dio.post(Endpoint.SIGNUP, data: {input});
+    Response res = await dio.post(Endpoint.SIGNUP, data: input);
     log("$res");
     return SignUpResponse.fromJson(res.toString());
   }
-  Future<ForgetPasswordResponse> selectFav(Map<String, dynamic> input) async {
-    Response res = await dio.post(Endpoint.FORGETPASSWORD, data: {input});
-    log("$res");
-    return ForgetPasswordResponse.fromJson(res.toString());
-  }
+
   Future<ForgetPasswordResponse> resetPassword(Map<String, dynamic> input) async {
-    Response res = await dio.post(Endpoint.RESETPASSWORD, data: {input});
+    Response res = await dio.post(Endpoint.RESETPASSWORD, data: input);
     log("$res");
     return ForgetPasswordResponse.fromJson(res.toString());
   }
