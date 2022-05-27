@@ -8,6 +8,7 @@ import 'package:vrudi/ui/login/login_event.dart';
 import 'package:vrudi/ui/login/login_state.dart';
 import 'package:vrudi/ui/login/model/login_response.dart';
 import 'package:vrudi/utility/network.dart';
+import 'package:vrudi/utility/sharedpref.dart';
 import 'package:vrudi/utility/utilty.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
@@ -26,6 +27,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   Stream<LoginState> getLogin(Map<String, dynamic> input) async* {
     if (await Network.isConnected()) {
       LoginResponse result = await apiProvider.login(input);
+      SharedPref.setStringPreference(SharedPref.VENDORID, result.data!.id);
       EasyLoading.dismiss();
       log("$result");
       if (result.hasErrors == false) {

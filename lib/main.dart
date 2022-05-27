@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -81,16 +83,16 @@ ThemeData themeData = ThemeData(
 void main() {
   // SystemChrome.setPreferredOrientations(
   //     [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
-  // dio.interceptors.add(LogInterceptor(
-  //     responseBody: true,
-  //     responseHeader: false,
-  //     requestBody: true,
-  //     request: true,
-  //     requestHeader: true,
-  //     error: true,
-  //     logPrint: (text) {
-  //       log(text.toString());
-  //     }));
+  dio.interceptors.add(LogInterceptor(
+      responseBody: true,
+      responseHeader: false,
+      requestBody: true,
+      request: true,
+      requestHeader: true,
+      error: true,
+      logPrint: (text) {
+        log(text.toString());
+      }));
   runApp(const MyApp());
 }
 

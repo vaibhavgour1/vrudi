@@ -7,7 +7,6 @@ import 'package:vrudi/ui/login/login_scren.dart';
 import 'package:vrudi/ui/signup/bloc/signup_bloc.dart';
 import 'package:vrudi/ui/signup/bloc/signup_event.dart';
 import 'package:vrudi/ui/signup/bloc/signup_state.dart';
-import 'package:vrudi/ui/usertype/user_type.dart';
 import 'package:vrudi/utility/utilty.dart';
 import 'package:vrudi/utility/validator.dart';
 
@@ -180,9 +179,10 @@ class _SignUpState extends State<SignUp> {
                     BlocConsumer<SignUpBloc, SignUpState>(
                         bloc: signUpBloc,
                         listener: (context, state) {
+                          log("sate====>$state");
                           if (state is GetSignUpState) {
                             Navigator.pushAndRemoveUntil(
-                                context, MaterialPageRoute(builder: (context) => const UserType()), (route) => true);
+                                context, MaterialPageRoute(builder: (context) => const LoginScreen()), (route) => true);
                           }
                           if (state is SignUpFailureState) {
                             Utility.showToast(
@@ -217,11 +217,7 @@ class _SignUpState extends State<SignUp> {
                       height: 25,
                     ),
                     InkWell(
-                      onTap: () {
-                        signUpEvent();
-                        Navigator.pushAndRemoveUntil(
-                            context, MaterialPageRoute(builder: (context) => const LoginScreen()), (route) => false);
-                      },
+                      onTap: () {},
                       child: const Text(
                         "Log In",
                         style: TextStyle(
@@ -262,9 +258,9 @@ class _SignUpState extends State<SignUp> {
       loginInput["password"] = passwordController.text;
       loginInput["securityQuestionAnswer"] = confirmController.text;
       loginInput["securityQuestion"] = "select fav Colors";
-      loginInput["userType"] = "professional";
-      loginInput["industry"] = "software engineer";
-      log("====>$loginInput");
+      loginInput["userType"] = "advocate";
+      loginInput["industry"] = "law";
+      log("loginInput====>$loginInput");
       signUpBloc.add(GetSignUpEvent(input: loginInput));
     }
   }

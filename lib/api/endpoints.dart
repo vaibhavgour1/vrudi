@@ -6,4 +6,5 @@ class Endpoint {
   static const String SIGNUP = "Accounts";
   //static const String FORGETPASSWORD = "Accounts/ForgotPassword";
   static const String RESETPASSWORD = "Accounts/ResetPassword";
+  static const String ORGANIZATION = "/OrganisationProfiles";
 }
