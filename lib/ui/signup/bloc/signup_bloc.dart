@@ -26,7 +26,9 @@ class SignUpBloc extends Bloc<SignupEvent, SignUpState> {
       print("lsignupevent ==> $input");
       SignUpResponse result = await apiProvider.signup(input);
       if (result.id.isNotEmpty) {
+        EasyLoading.dismiss();
         yield GetSignUpState(message: result);
+
         log(">>>>>>>$result");
       }
       // if (result.hasErrors) {

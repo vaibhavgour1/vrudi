@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:vrudi/ui/firebase/firebase_methods.dart';
 import 'package:vrudi/ui/login/login_scren.dart';
 import 'package:vrudi/ui/signup/bloc/signup_bloc.dart';
 import 'package:vrudi/ui/signup/bloc/signup_event.dart';
@@ -26,6 +27,7 @@ class _SignUpState extends State<SignUp> {
   TextEditingController confirmController = TextEditingController();
   TextEditingController selectSecurityController = TextEditingController();
   TextEditingController securityController = TextEditingController();
+  bool isLoading = false;
   @override
   Widget build(BuildContext context) {
     double deviceWidth = MediaQuery.of(context).size.width;
@@ -181,8 +183,16 @@ class _SignUpState extends State<SignUp> {
                         listener: (context, state) {
                           log("sate====>$state");
                           if (state is GetSignUpState) {
-                            Navigator.pushAndRemoveUntil(
-                                context, MaterialPageRoute(builder: (context) => const LoginScreen()), (route) => true);
+                            createAccount(nameController.text, emailController.text, passwordController.text)
+                                .then((user) {
+                              if (user != null) {
+                                print("Login Succesfulle");
+                                Navigator.pushAndRemoveUntil(context,
+                                    MaterialPageRoute(builder: (context) => const LoginScreen()), (route) => true);
+                              } else {
+                                print("Login UnSuccesfulle");
+                              }
+                            });
                           }
                           if (state is SignUpFailureState) {
                             Utility.showToast(
@@ -261,6 +271,7 @@ class _SignUpState extends State<SignUp> {
       loginInput["userType"] = "advocate";
       loginInput["industry"] = "law";
       log("loginInput====>$loginInput");
+      CircularProgressIndicator();
       signUpBloc.add(GetSignUpEvent(input: loginInput));
     }
   }

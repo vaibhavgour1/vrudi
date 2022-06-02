@@ -60,6 +60,11 @@ dependencies:
   flutter_easyloading:
   #bloc architecture
   flutter_bloc: 7.3.3
+  firebase_auth:
+  firebase_core:
+  cloud_firestore: ^2.4.0
+  firebase_storage:
+  uuid:
 
 dev_dependencies:
   flutter_test:

@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:vrudi/ui/chat/chat_screen.dart';
 import 'package:vrudi/ui/drawer/drawer.dart';
 import 'package:vrudi/ui/hrmsDetail/hrmshome.dart';
 import 'package:vrudi/ui/newanduseproject/new_project_template.dart';
@@ -101,8 +102,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                 : index == 4
                                     ? Navigator.pushAndRemoveUntil(
                                         context, MaterialPageRoute(builder: (context) => HrmsHome()), (route) => true)
-                                    : Navigator.pushAndRemoveUntil(context,
-                                        MaterialPageRoute(builder: (context) => const TaskList()), (route) => true);
+                                    : index == 4
+                                        ? Navigator.pushAndRemoveUntil(
+                                            context,
+                                            MaterialPageRoute(builder: (context) => const ChatScreen()),
+                                            (route) => true)
+                                        : Navigator.pushAndRemoveUntil(context,
+                                            MaterialPageRoute(builder: (context) => const TaskList()), (route) => true);
                       },
                       child: Container(
                         alignment: Alignment.center,

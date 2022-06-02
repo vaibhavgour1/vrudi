@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -80,7 +81,9 @@ ThemeData themeData = ThemeData(
       // toolbarTextStyle: Theme.of(context).textTheme.headline6!.merge(TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
       // titleTextStyle: Theme.of(context).textTheme.headline6!.merge(TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
     ));
-void main() {
+Future main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  Firebase.initializeApp();
   // SystemChrome.setPreferredOrientations(
   //     [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   dio.interceptors.add(LogInterceptor(

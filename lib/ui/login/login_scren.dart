@@ -1,9 +1,8 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:vrudi/ui/firebase/firebase_methods.dart';
 import 'package:vrudi/ui/home/home.dart';
 import 'package:vrudi/ui/login/login_bloc.dart';
 import 'package:vrudi/ui/login/login_event.dart';
@@ -23,10 +22,10 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   TextEditingController passwordController = TextEditingController();
-  TextEditingController usernameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
   LoginBloc loginBloc = LoginBloc();
   // LoginViewModel _loginViewModel = LoginViewModel();
-  // TextEditingController emailController = TextEditingController();
+  // TextEditingController passwordController = TextEditingController();
 
   loginApiCall(username, password) async {
     if (username.isEmpty) {
@@ -60,10 +59,16 @@ class _LoginScreenState extends State<LoginScreen> {
       child: BlocConsumer<LoginBloc, LoginState>(
         bloc: loginBloc,
         listener: (context, state) async {
-          log("===>$state");
           if (state is GetLoginState) {
-            Navigator.pushAndRemoveUntil(
-                context, MaterialPageRoute(builder: (context) => const HomeScreen()), (route) => true);
+            login(emailController.text, passwordController.text).then((user) {
+              if (user != null) {
+                print("Login Succesfulle");
+                Navigator.pushAndRemoveUntil(
+                    context, MaterialPageRoute(builder: (context) => const HomeScreen()), (route) => true);
+              } else {
+                print("Login UnSuccesfulle");
+              }
+            });
           }
           if (state is GetLoginFailureState) {
             Fluttertoast.showToast(
@@ -107,7 +112,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           validator: (numb) => Validator.emailValidator(numb!),
                           autovalidateMode: AutovalidateMode.onUserInteraction,
                           inputFormatters: [FilteringTextInputFormatter.singleLineFormatter],
-                          controller: usernameController,
+                          controller: emailController,
                           decoration: InputDecoration(
                             filled: true,
                             fillColor: const Color.fromRGBO(242, 242, 242, 1),
@@ -167,7 +172,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         color: Colors.orange,
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                         onPressed: () async {
-                          loginApiCall(usernameController.text, passwordController.text);
+                          loginApiCall(emailController.text, passwordController.text);
                         },
                         child: const Text(
                           "Login",
@@ -231,7 +236,7 @@ class _LoginScreenState extends State<LoginScreen> {
 // }
 //
 // class _TextFormState extends State<TextForm> {
-//   TextEditingController usernameController = TextEditingController();
+//   TextEditingController emailController = TextEditingController();
 //
 //   @override
 //   Widget build(BuildContext context) {
