@@ -1,5 +1,7 @@
 import 'dart:developer';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -28,6 +30,8 @@ class _SignUpState extends State<SignUp> {
   TextEditingController selectSecurityController = TextEditingController();
   TextEditingController securityController = TextEditingController();
   bool isLoading = false;
+  FirebaseAuth _auth = FirebaseAuth.instance;
+  FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
   @override
   Widget build(BuildContext context) {
     double deviceWidth = MediaQuery.of(context).size.width;
@@ -184,9 +188,10 @@ class _SignUpState extends State<SignUp> {
                           log("sate====>$state");
                           if (state is GetSignUpState) {
                             createAccount(nameController.text, emailController.text, passwordController.text)
-                                .then((user) {
+                                .then((user) async {
                               if (user != null) {
                                 print("Login Succesfulle");
+
                                 Navigator.pushAndRemoveUntil(context,
                                     MaterialPageRoute(builder: (context) => const LoginScreen()), (route) => true);
                               } else {

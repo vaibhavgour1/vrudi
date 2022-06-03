@@ -9,6 +9,10 @@ Future<UserCredential?> createAccount(String name, String email, String password
     UserCredential userCrendetial = await _auth.createUserWithEmailAndPassword(email: email, password: password);
     if (userCrendetial != null) {
       print("Login Succefull");
+      await _firestore
+          .collection("users")
+          .doc(_auth.currentUser!.uid)
+          .set({"name": name, "email": email, "status": "Unavalible"});
       return userCrendetial;
     } else {
       print("Account Creation failed");

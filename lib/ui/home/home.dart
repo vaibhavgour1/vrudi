@@ -102,7 +102,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 : index == 4
                                     ? Navigator.pushAndRemoveUntil(
                                         context, MaterialPageRoute(builder: (context) => HrmsHome()), (route) => true)
-                                    : index == 4
+                                    : index == 5
                                         ? Navigator.pushAndRemoveUntil(
                                             context,
                                             MaterialPageRoute(builder: (context) => const ChatScreen()),
