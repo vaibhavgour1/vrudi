@@ -9,6 +9,7 @@ Future<UserCredential?> createAccount(String name, String email, String password
     UserCredential userCrendetial = await _auth.createUserWithEmailAndPassword(email: email, password: password);
     if (userCrendetial != null) {
       print("Login Succefull");
+      userCrendetial.user!.updateDisplayName(name);
       await _firestore
           .collection("users")
           .doc(_auth.currentUser!.uid)
