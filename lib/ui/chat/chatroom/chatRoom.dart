@@ -23,7 +23,7 @@ class ChatRoom extends StatelessWidget {
         "message": _message.text,
         "time": FieldValue.serverTimestamp(),
       };
-      await _firestore.collection('chatroom').doc(chatRoomId).collection('chats').add({});
+      await _firestore.collection('chatroom').doc(chatRoomId).collection('chats').add(message);
 
       _message.clear();
     } else {
@@ -37,25 +37,27 @@ class ChatRoom extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: StreamBuilder<DocumentSnapshot>(
-          stream: _firestore.collection("users").doc(userMap['uid']).snapshots(),
-          builder: (context, snapshot) {
-            if (snapshot.data != null) {
-              return Container(
-                child: Column(
-                  children: [
-                    Text(userMap['name']),
-                    Text(
-                      snapshot.data!['status'],
-                      style: TextStyle(fontSize: 14),
-                    ),
-                  ],
-                ),
-              );
-            } else {
-              return Container();
-            }
-          },
+        title: Container(
+          child: StreamBuilder<DocumentSnapshot>(
+            stream: _firestore.collection("users").doc(userMap['uid']).snapshots(),
+            builder: (context, snapshot) {
+              if (snapshot.data != null) {
+                return Container(
+                  child: Column(
+                    children: [
+                      Text(userMap['name']),
+                      // Text(
+                      //   snapshot.data!['status'],
+                      //   style: TextStyle(fontSize: 14),
+                      // ),
+                    ],
+                  ),
+                );
+              } else {
+                return Container();
+              }
+            },
+          ),
         ),
       ),
       body: SingleChildScrollView(
@@ -76,9 +78,9 @@ class ChatRoom extends StatelessWidget {
                     return ListView.builder(
                       itemCount: snapshot.data!.docs.length,
                       itemBuilder: (context, index) {
-                        return Text(snapshot.data!.docs[index]['message']);
-                        //   Map<String, dynamic> map = snapshot.data!.docs[index].data() as Map<String, dynamic>;
-                        //   return messages(size, map, context);
+                        // return Text(snapshot.data!.docs[index]['message']);
+                        Map<String, dynamic> map = snapshot.data!.docs[index].data() as Map<String, dynamic>;
+                        return messages(size, map, context);
                       },
                     );
                   } else {
@@ -87,6 +89,36 @@ class ChatRoom extends StatelessWidget {
                 },
               ),
             ),
+            Container(
+              height: size.height / 10,
+              width: size.width,
+              alignment: Alignment.center,
+              child: Container(
+                height: size.height / 12,
+                width: size.width / 1.1,
+                child: Row(
+                  children: [
+                    Container(
+                      height: size.height / 12,
+                      width: size.width * 0.75,
+                      child: TextFormField(
+                          controller: _message,
+                          decoration: InputDecoration(
+                            hintText: "Send Message",
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            focusedBorder: const OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.red, width: 2),
+                            ),
+                            enabledBorder: const OutlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
+                          )),
+                    ),
+                    IconButton(onPressed: onSendMessage, icon: const Icon(Icons.send)),
+                  ],
+                ),
+              ),
+            )
             // Container(
             //   height: size.height / 10,
             //   width: size.width,
@@ -122,86 +154,57 @@ class ChatRoom extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: Container(
-        height: size.height / 10,
-        width: size.width,
-        alignment: Alignment.center,
-        child: Container(
-          height: size.height / 12,
-          width: size.width / 1.1,
-          child: Row(
-            children: [
-              Container(
-                height: size.height / 12,
-                width: size.width / 1.5,
-                child: TextFormField(
-                  controller: _message,
-                  decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  )),
-                ),
-              ),
-              IconButton(onPressed: onSendMessage, icon: Icon(Icons.send)),
-            ],
+    );
+  }
+
+  Widget messages(Size size, Map<String, dynamic> map, BuildContext context) {
+    return Container(
+      width: size.width,
+      alignment: map['sendby'] == _auth.currentUser!.displayName ? Alignment.centerRight : Alignment.centerLeft,
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 14),
+        margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 8),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(15),
+          color: Colors.red,
+        ),
+        child: Text(
+          map['message'],
+          style: const TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.w500,
+            color: Colors.white,
           ),
         ),
       ),
     );
+    // : Container(
+    //     height: size.height / 2.5,
+    //     width: size.width,
+    //     padding: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
+    //     alignment: map['sendby'] == _auth.currentUser!.displayName ? Alignment.centerRight : Alignment.centerLeft,
+    //     child: InkWell(
+    //       onTap: () {},
+    //       // onTap: () => Navigator.of(context).push(
+    //       //   MaterialPageRoute(
+    //       //     builder: (_) => ShowImage(
+    //       //       imageUrl: map['message'],
+    //       //     ),
+    //       //   ),
+    //
+    //       child: Container(
+    //         height: size.height / 2.5,
+    //         width: size.width / 2,
+    //         decoration: BoxDecoration(border: Border.all()),
+    //         alignment: map['message'] != "" ? null : Alignment.center,
+    //         child: map['message'] != ""
+    //             ? Image.network(
+    //                 map['message'],
+    //                 fit: BoxFit.cover,
+    //               )
+    //             : CircularProgressIndicator(),
+    //       ),
+    //     ),
+    //   );
   }
-
-  // Widget messages(Size size, Map<String, dynamic> map, BuildContext context) {
-  //   return map['type'] == "text"
-  //       ? Container(
-  //     width: size.width,
-  //     alignment: map['sendby'] == _auth.currentUser!.displayName
-  //         ? Alignment.centerRight
-  //         : Alignment.centerLeft,
-  //     child: Container(
-  //       padding: EdgeInsets.symmetric(vertical: 10, horizontal: 14),
-  //       margin: EdgeInsets.symmetric(vertical: 5, horizontal: 8),
-  //       decoration: BoxDecoration(
-  //         borderRadius: BorderRadius.circular(15),
-  //         color: Colors.blue,
-  //       ),
-  //       child: Text(
-  //         map['message'],
-  //         style: TextStyle(
-  //           fontSize: 16,
-  //           fontWeight: FontWeight.w500,
-  //           color: Colors.white,
-  //         ),
-  //       ),
-  //     ),
-  //   )
-  //       : Container(
-  //     height: size.height / 2.5,
-  //     width: size.width,
-  //     padding: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
-  //     alignment: map['sendby'] == _auth.currentUser!.displayName
-  //         ? Alignment.centerRight
-  //         : Alignment.centerLeft,
-  //     child: InkWell(
-  //       onTap: () => Navigator.of(context).push(
-  //         MaterialPageRoute(
-  //           builder: (_) => ShowImage(
-  //             imageUrl: map['message'],
-  //           ),
-  //         ),
-  //       ),
-  //       child: Container(
-  //         height: size.height / 2.5,
-  //         width: size.width / 2,
-  //         decoration: BoxDecoration(border: Border.all()),
-  //         alignment: map['message'] != "" ? null : Alignment.center,
-  //         child: map['message'] != ""
-  //             ? Image.network(
-  //           map['message'],
-  //           fit: BoxFit.cover,
-  //         )
-  //             : CircularProgressIndicator(),
-  //       ),
-  //     ),
-  //   );
-  // }
 }

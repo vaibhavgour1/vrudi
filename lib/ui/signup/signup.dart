@@ -8,7 +8,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vrudi/ui/firebase/firebase_methods.dart';
 import 'package:vrudi/ui/login/login_scren.dart';
 import 'package:vrudi/ui/signup/bloc/signup_bloc.dart';
-import 'package:vrudi/ui/signup/bloc/signup_event.dart';
 import 'package:vrudi/ui/signup/bloc/signup_state.dart';
 import 'package:vrudi/utility/utilty.dart';
 import 'package:vrudi/utility/validator.dart';
@@ -253,32 +252,41 @@ class _SignUpState extends State<SignUp> {
   }
 
   signUpEvent() async {
-    if (emailController.text.isEmpty) {
-      Utility.showToast(msg: "Please Enter userName");
-    } else if (nameController.text.isEmpty) {
-      Utility.showToast(msg: "Please Enter Password");
-    } else if (usernameController.text.isEmpty) {
-      Utility.showToast(msg: "Please Enter Password");
-    } else if (passwordController.text.isEmpty) {
-      Utility.showToast(msg: "Please Enter Password");
-    } else if (confirmController.text.isEmpty) {
-      Utility.showToast(msg: "Please Enter Password");
-    } else if (selectSecurityController.text.isEmpty) {
-      Utility.showToast(msg: "Please Enter Password");
-    } else {
-      Map<String, dynamic> loginInput = Map<String, dynamic>();
-      loginInput["email"] = emailController.text;
-      loginInput["fullName"] = nameController.text;
-      loginInput["userName"] = usernameController.text;
-      loginInput["password"] = passwordController.text;
-      loginInput["securityQuestionAnswer"] = confirmController.text;
-      loginInput["securityQuestion"] = "select fav Colors";
-      loginInput["userType"] = "advocate";
-      loginInput["industry"] = "law";
-      log("loginInput====>$loginInput");
-      CircularProgressIndicator();
-      signUpBloc.add(GetSignUpEvent(input: loginInput));
-    }
+    createAccount(nameController.text, emailController.text, passwordController.text).then((user) async {
+      if (user != null) {
+        print("Login Succesfulle");
+
+        Navigator.pushAndRemoveUntil(
+            context, MaterialPageRoute(builder: (context) => const LoginScreen()), (route) => true);
+      } else {
+        print("Login UnSuccesfulle");
+      }
+    });
+    // if (emailController.text.isEmpty) {
+    //   Utility.showToast(msg: "Please Enter userName");
+    // } else if (nameController.text.isEmpty) {
+    //   Utility.showToast(msg: "Please Enter Password");
+    // } else if (usernameController.text.isEmpty) {
+    //   Utility.showToast(msg: "Please Enter Password");
+    // } else if (passwordController.text.isEmpty) {
+    //   Utility.showToast(msg: "Please Enter Password");
+    // } else if (confirmController.text.isEmpty) {
+    //   Utility.showToast(msg: "Please Enter Password");
+    // } else if (selectSecurityController.text.isEmpty) {
+    //   Utility.showToast(msg: "Please Enter Password");
+    // } else {
+    //   Map<String, dynamic> loginInput = Map<String, dynamic>();
+    //   loginInput["email"] = emailController.text;
+    //   loginInput["fullName"] = nameController.text;
+    //   loginInput["userName"] = usernameController.text;
+    //   loginInput["password"] = passwordController.text;
+    //   loginInput["securityQuestionAnswer"] = confirmController.text;
+    //   loginInput["securityQuestion"] = "select fav Colors";
+    //   loginInput["userType"] = "advocate";
+    //   loginInput["industry"] = "law";
+    //   log("loginInput====>$loginInput");
+    //   CircularProgressIndicator();
+    //   signUpBloc.add(GetSignUpEvent(input: loginInput));
   }
 
   void bottomSheet() {

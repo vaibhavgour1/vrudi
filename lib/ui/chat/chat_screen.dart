@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -11,12 +13,19 @@ class ChatScreen extends StatefulWidget {
   _ChatScreenState createState() => _ChatScreenState();
 }
 
-class _ChatScreenState extends State<ChatScreen> {
+class _ChatScreenState extends State<ChatScreen> with WidgetsBindingObserver {
+  //to find app in which state
   TextEditingController serachController = TextEditingController();
   Map<String, dynamic>? userMap;
   bool loading = false;
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance!.addObserver(this);
+    //
+  }
+
   String chatRoomId(String user1, String user2) {
     if (user1[0].toLowerCase().codeUnits[0] > user2.toLowerCase().codeUnits[0]) {
       return "$user1$user2";
@@ -100,6 +109,7 @@ class _ChatScreenState extends State<ChatScreen> {
                     userMap != null
                         ? ListTile(
                             onTap: () {
+                              log("_auth.currentUser!.displayName!${_auth.currentUser!.displayName!}");
                               String roomId = chatRoomId(_auth.currentUser!.displayName!, userMap!['name']);
 
                               Navigator.of(context).push(

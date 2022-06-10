@@ -5,7 +5,6 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:vrudi/ui/firebase/firebase_methods.dart';
 import 'package:vrudi/ui/home/home.dart';
 import 'package:vrudi/ui/login/login_bloc.dart';
-import 'package:vrudi/ui/login/login_event.dart';
 import 'package:vrudi/ui/login/login_state.dart';
 import 'package:vrudi/ui/selectfavColor/select_fav.dart';
 import 'package:vrudi/ui/signup/signup.dart';
@@ -33,11 +32,20 @@ class _LoginScreenState extends State<LoginScreen> {
     } else if (password.isEmpty) {
       Utility.showToast(msg: "Please Enter Password");
     } else {
+      login(emailController.text, passwordController.text).then((user) {
+        if (user != null) {
+          print("Login Succesfulle");
+          Navigator.pushAndRemoveUntil(
+              context, MaterialPageRoute(builder: (context) => const HomeScreen()), (route) => true);
+        } else {
+          print("Login UnSuccesfulle");
+        }
+      });
       Map<String, dynamic> loginInput = Map<String, dynamic>();
       loginInput["userId"] = username;
       loginInput["password"] = password;
 
-      loginBloc.add(GetLoginEvent(input: loginInput));
+      // loginBloc.add(GetLoginEvent(input: loginInput));
     }
   }
 
