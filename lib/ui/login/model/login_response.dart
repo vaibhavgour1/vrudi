@@ -1,56 +1,74 @@
 import 'dart:convert';
-// class SignUpResponse {
-//   SignUpResponse({
-//     this.data,
-//     this.hasErrors,
-//     this.message,
-//   });
-//
-//   List<Datum> data;
-//   bool hasErrors;
-//   String message;
-//
-//   factory SignUpResponse.fromJson(String str) => SignUpResponse.fromMap(json.decode(str));
-//
-//   String toJson() => json.encode(toMap());
-//
-//   factory SignUpResponse.fromMap(Map<String, dynamic> json) => SignUpResponse(
-//     data: json["data"] == null ? null : List<Datum>.from(json["data"].map((x) => Datum.fromMap(x))),
-//     hasErrors: json["hasErrors"] == null ? null : json["hasErrors"],
-//     message: json["message"] == null ? null : json["message"],
-//   );
-//
-//   Map<String, dynamic> toMap() => {
-//     "data": data == null ? null : List<dynamic>.from(data.map((x) => x.toMap())),
-//     "hasErrors": hasErrors == null ? null : hasErrors,
-//     "message": message == null ? null : message,
-//   };
-// }
+
 class LoginResponse {
   LoginResponse({
+    this.success,
+    this.message,
     this.data,
-    required this.hasErrors,
-    required this.message,
   });
 
-  LoginData? data;
-  bool hasErrors;
-  String message;
+  bool? success;
+  String? message;
+  Data? data;
 
-  factory LoginResponse.fromJson(String str) => LoginResponse.fromMap(json.decode(str));
+  factory LoginResponse.fromJson(String str) =>
+      LoginResponse.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
 
   factory LoginResponse.fromMap(Map<String, dynamic> json) => LoginResponse(
-        data: json["data"] == null ? null : LoginData.fromMap(json["data"]),
-        hasErrors: json["hasErrors"] == null ? null : json["hasErrors"],
+        success: json["success"] == null ? null : json["success"],
         message: json["message"] == null ? null : json["message"],
+        data: json["data"] == null ? null : Data.fromMap(json["data"]),
       );
 
   Map<String, dynamic> toMap() => {
-        "data": data == null ? null : data!.toMap(),
-        "hasErrors": hasErrors == null ? null : hasErrors,
+        "success": success == null ? null : success,
         "message": message == null ? null : message,
+        "data": data == null ? null : data!.toMap(),
+      };
+}
+
+class Data {
+  Data({
+    this.dataObject,
+  });
+
+  DataObject? dataObject;
+
+  factory Data.fromJson(String str) => Data.fromMap(json.decode(str));
+
+  String toJson() => json.encode(toMap());
+
+  factory Data.fromMap(Map<String, dynamic> json) => Data(
+        dataObject: json["dataObject"] == null
+            ? null
+            : DataObject.fromMap(json["dataObject"]),
+      );
+
+  Map<String, dynamic> toMap() => {
+        "dataObject": dataObject == null ? null : dataObject!.toMap(),
+      };
+}
+
+class DataObject {
+  DataObject({
+    this.token,
+  });
+
+  String? token;
+
+  factory DataObject.fromJson(String str) =>
+      DataObject.fromMap(json.decode(str));
+
+  String toJson() => json.encode(toMap());
+
+  factory DataObject.fromMap(Map<String, dynamic> json) => DataObject(
+        token: json["token"] == null ? null : json["token"],
+      );
+
+  Map<String, dynamic> toMap() => {
+        "token": token == null ? null : token,
       };
 }
 

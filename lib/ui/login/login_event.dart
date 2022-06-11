@@ -7,6 +7,7 @@ abstract class LoginEvent extends Equatable {
 
 class GetLoginEvent extends LoginEvent {
   final Map<String, dynamic> input;
+
   GetLoginEvent({required this.input});
 
   @override
