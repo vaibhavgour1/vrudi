@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +21,29 @@ class _ChatScreenState extends State<ChatScreen> with WidgetsBindingObserver {
   void initState() {
     super.initState();
     WidgetsBinding.instance!.addObserver(this);
+    setStatus("Online");
+
+    //with with help this we intilized WidgetsBindingObserver
     //
+  }
+
+  @override
+  void didchangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      //user nai bg kerke app ko wapis forground mai laya ho online
+      setStatus("Online");
+    } else {
+      //offline
+      setStatus("Offline");
+    }
+  }
+//jo ki hume wb observer provide kerta with help this we find the current state of the app
+
+  void setStatus(String status) async {
+    await _firestore.collection('users').doc(_auth.currentUser!.uid).update({
+      "status": status,
+    });
+    // log("===>${_firestore.collection('users').doc(_auth.currentUser!.uid).get()}");
   }
 
   String chatRoomId(String user1, String user2) {
@@ -109,7 +129,7 @@ class _ChatScreenState extends State<ChatScreen> with WidgetsBindingObserver {
                     userMap != null
                         ? ListTile(
                             onTap: () {
-                              log("_auth.currentUser!.displayName!${_auth.currentUser!.displayName!}");
+                              // log("_auth.currentUser!.displayName!${_auth.currentUser!.displayName!}");
                               String roomId = chatRoomId(_auth.currentUser!.displayName!, userMap!['name']);
 
                               Navigator.of(context).push(

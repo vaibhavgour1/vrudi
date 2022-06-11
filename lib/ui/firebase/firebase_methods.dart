@@ -14,7 +14,7 @@ Future<UserCredential?> createAccount(String name, String email, String password
       await _firestore
           .collection("users")
           .doc(_auth.currentUser!.uid)
-          .set({"name": name, "email": email, "status": "Unavalible"});
+          .set({"name": name, "email": email, "status": "Unavalible", "uid": _auth.currentUser!.uid});
       return userCrendetial;
     } else {
       print("Account Creation failed");
