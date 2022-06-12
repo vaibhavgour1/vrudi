@@ -60,7 +60,9 @@ class _ChatScreenState extends State<ChatScreen> {
                   // errorText: Validator.validateMobile(edtMobile.text, context),
                 ),
               ),
-              BlocConsumer(builder: ((context, state) {}), listener: (context, state) {})
+              BlocConsumer(builder: ((context, state) {
+
+              }), listener: (context, state) {})
             ],
           ),
         ));
