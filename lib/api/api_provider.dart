@@ -18,10 +18,15 @@ class ApiProvider {
     return apiProvider;
   }
 
-  Future<LoginResponse> login(Map<String, dynamic> input) async {
+  Future<LoginResponse> login({
+    required Map<String, dynamic> input,
+  }) async {
     log("$input");
-    Response res = await dio.post(Endpoint.LOGIN, data: input);
-    log("$res");
+    Response res = await dio.get(Endpoint.LOGIN, queryParameters: {
+      "email": input["userId"],
+      "password": input["password"]
+    });
+    log("res--->$res");
     return LoginResponse.fromJson(res.toString());
   }
 
@@ -31,9 +36,11 @@ class ApiProvider {
     return SignUpResponse.fromJson(res.toString());
   }
 
-  Future<ForgetPasswordResponse> resetPassword(Map<String, dynamic> input) async {
-    Response res = await dio.post(Endpoint.RESETPASSWORD, data: input);
-    log("$res");
+  Future<ForgetPasswordResponse> resetPassword(
+      Map<String, dynamic> input) async {
+    Response res = await dio
+        .post(Endpoint.FORGETPASSWORD, data: input, queryParameters: {});
+    log("res-->$res");
     return ForgetPasswordResponse.fromJson(res.toString());
   }
 

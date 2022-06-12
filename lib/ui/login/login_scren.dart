@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:vrudi/ui/firebase/firebase_methods.dart';
-import 'package:vrudi/ui/home/home.dart';
 import 'package:vrudi/ui/login/login_bloc.dart';
 import 'package:vrudi/ui/login/login_event.dart';
 import 'package:vrudi/ui/login/login_state.dart';
@@ -33,7 +32,7 @@ class _LoginScreenState extends State<LoginScreen> {
     } else if (password.isEmpty) {
       Utility.showToast(msg: "Please Enter Password");
     } else {
-      Map<String, dynamic> loginInput = Map<String, dynamic>();
+      Map<String, dynamic> loginInput = <String, dynamic>{};
       loginInput["userId"] = username;
       loginInput["password"] = password;
 
@@ -63,8 +62,19 @@ class _LoginScreenState extends State<LoginScreen> {
             login(emailController.text, passwordController.text).then((user) {
               if (user != null) {
                 print("Login Succesfulle");
-                Navigator.pushAndRemoveUntil(
-                    context, MaterialPageRoute(builder: (context) => const HomeScreen()), (route) => true);
+                login(emailController.text, passwordController.text)
+                    .then((user) {
+                  if (user != null) {
+                    print("Login Succesfulle");
+                    // Navigator.pushAndRemoveUntil(
+                    //     context,
+                    //     MaterialPageRoute(
+                    //         builder: (context) => const HomeScreen()),
+                    //     (route) => true);
+                  } else {
+                    print("Login UnSuccesfulle");
+                  }
+                });
               } else {
                 print("Login UnSuccesfulle");
               }
@@ -79,7 +89,8 @@ class _LoginScreenState extends State<LoginScreen> {
           }
           if (state is LoginInitialState) {
             Container(
-                height: MediaQuery.of(context).size.height * 0.70, child: Center(child: CircularProgressIndicator()));
+                height: MediaQuery.of(context).size.height * 0.70,
+                child: Center(child: CircularProgressIndicator()));
           }
         },
         builder: (context, state) {
@@ -109,30 +120,42 @@ class _LoginScreenState extends State<LoginScreen> {
                         padding: const EdgeInsets.symmetric(horizontal: 30),
                         child: TextFormField(
                           keyboardType: TextInputType.emailAddress,
-                          validator: (numb) => Validator.emailValidator(numb!),
+                          // validator: (numb) => Validator.emailValidator(numb!),
                           autovalidateMode: AutovalidateMode.onUserInteraction,
-                          inputFormatters: [FilteringTextInputFormatter.singleLineFormatter],
+                          inputFormatters: [
+                            FilteringTextInputFormatter.singleLineFormatter
+                          ],
                           controller: emailController,
                           decoration: InputDecoration(
                             filled: true,
                             fillColor: const Color.fromRGBO(242, 242, 242, 1),
                             counterText: "",
                             hintText: "Please Enter Email",
-                            prefixIcon: const Icon(Icons.email, color: Colors.black),
+                            prefixIcon:
+                                const Icon(Icons.email, color: Colors.black),
                             border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: BorderSide.none),
                             enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: BorderSide.none),
                             disabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: BorderSide.none),
                             focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: BorderSide.none),
                             errorBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: BorderSide.none),
                             focusedErrorBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
-                            prefixIconConstraints:
-                                const BoxConstraints(minWidth: 50, minHeight: 25, maxWidth: 51, maxHeight: 25),
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: BorderSide.none),
+                            prefixIconConstraints: const BoxConstraints(
+                                minWidth: 50,
+                                minHeight: 25,
+                                maxWidth: 51,
+                                maxHeight: 25),
                             // errorText: Validator.validateMobile(edtMobile.text, context),
                           ),
                         ),
@@ -144,9 +167,12 @@ class _LoginScreenState extends State<LoginScreen> {
                         padding: const EdgeInsets.symmetric(horizontal: 30),
                         child: TextFormField(
                           keyboardType: TextInputType.visiblePassword,
-                          validator: (numb) => Validator.passwordValidator(numb!),
+                          validator: (numb) =>
+                              Validator.passwordValidator(numb!),
                           autovalidateMode: AutovalidateMode.onUserInteraction,
-                          inputFormatters: [FilteringTextInputFormatter.singleLineFormatter],
+                          inputFormatters: [
+                            FilteringTextInputFormatter.singleLineFormatter
+                          ],
                           controller: passwordController,
                           decoration: const InputDecoration(
                             filled: true,
@@ -155,8 +181,11 @@ class _LoginScreenState extends State<LoginScreen> {
                             hintText: "Please Enter Password",
                             prefixIcon: Icon(Icons.key, color: Colors.black),
 
-                            prefixIconConstraints:
-                                BoxConstraints(minWidth: 50, minHeight: 25, maxWidth: 51, maxHeight: 25),
+                            prefixIconConstraints: BoxConstraints(
+                                minWidth: 50,
+                                minHeight: 25,
+                                maxWidth: 51,
+                                maxHeight: 25),
                             // errorText: Validator.validateMobile(edtMobile.text, context),
                           ),
                         ),
@@ -170,13 +199,18 @@ class _LoginScreenState extends State<LoginScreen> {
                         padding: const EdgeInsets.all(8.0),
                         textColor: Colors.white,
                         color: Colors.orange,
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10)),
                         onPressed: () async {
-                          loginApiCall(emailController.text, passwordController.text);
+                          loginApiCall(
+                              emailController.text, passwordController.text);
                         },
                         child: const Text(
                           "Login",
-                          style: TextStyle(fontSize: 19, fontWeight: FontWeight.w600, decoration: TextDecoration.none),
+                          style: TextStyle(
+                              fontSize: 19,
+                              fontWeight: FontWeight.w600,
+                              decoration: TextDecoration.none),
                         ),
                       ),
                       const SizedBox(
@@ -184,8 +218,12 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       InkWell(
                         onTap: () {
-                          Navigator.pushAndRemoveUntil(context,
-                              MaterialPageRoute(builder: (context) => const SelectFavScreen()), (route) => true);
+                          Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const SelectFavScreen()),
+                              (route) => true);
                         },
                         child: const Text(
                           "Forget PassWord?",
@@ -202,7 +240,10 @@ class _LoginScreenState extends State<LoginScreen> {
                       InkWell(
                         onTap: () {
                           Navigator.pushAndRemoveUntil(
-                              context, MaterialPageRoute(builder: (context) => const SignUp()), (route) => true);
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const SignUp()),
+                              (route) => true);
                         },
                         child: const Text(
                           "Sign Up",

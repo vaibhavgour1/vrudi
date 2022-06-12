@@ -19,21 +19,26 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     if (event is GetLoginEvent) {
       yield LoadingState();
       yield* getLogin(
-        event.input,
+        input: event.input,
       );
     }
   }
 
-  Stream<LoginState> getLogin(Map<String, dynamic> input) async* {
+  Stream<LoginState> getLogin({
+    required Map<String, dynamic> input,
+  }) async* {
     if (await Network.isConnected()) {
-      LoginResponse result = await apiProvider.login(input);
-      SharedPref.setStringPreference(SharedPref.VENDORID, result.data!.id);
+      LoginResponse result = await apiProvider.login(
+        input: input,
+      );
+      SharedPref.setStringPreference(
+          SharedPref.TOKEN, result.data!.dataObject!.token!);
       EasyLoading.dismiss();
       log("$result");
-      if (result.hasErrors == false) {
+      if (result.success == false) {
         yield GetLoginState(message: result.message);
       } else {
-        yield GetLoginFailureState(message: result.message);
+        yield GetLoginFailureState(message: result.message!);
       }
     } else {
       EasyLoading.dismiss();
