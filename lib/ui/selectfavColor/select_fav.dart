@@ -229,7 +229,7 @@ class _SelectFavScreenState extends State<SelectFavScreen> {
     } else {
       Map<String, dynamic> loginInput = Map<String, dynamic>();
       loginInput["email"] = emailController.text;
-      loginInput["securityQuestion"] = "select fav Colors";
+      loginInput["securityQuestion"] = "select fav Color";
       loginInput["securityQuestionAnswer"] = favcolorController.text;
       loginInput["NewPassword"] = confirmPasswordController.text;
       selectFavBloc.add(GetSelectFavEvent(input: loginInput));

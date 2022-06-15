@@ -129,7 +129,7 @@ class _ChatScreenState extends State<ChatScreen> with WidgetsBindingObserver {
                     userMap != null
                         ? ListTile(
                             onTap: () {
-                              // log("_auth.currentUser!.displayName!${_auth.currentUser!.displayName!}");
+                              //  log("_auth.currentUser!.displayName!${_auth.currentUser!.displayName!}");
                               String roomId = chatRoomId(_auth.currentUser!.displayName!, userMap!['name']);
 
                               Navigator.of(context).push(
