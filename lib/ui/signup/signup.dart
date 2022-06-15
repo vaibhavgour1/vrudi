@@ -170,7 +170,7 @@ class _SignUpState extends State<SignUp> {
                         filled: true,
                         fillColor: const Color.fromRGBO(242, 242, 242, 1),
                         counterText: "",
-                        hintText: "Please Enter Security Answer",
+                        hintText: "select fav Color",
                         prefixIcon: const Icon(Icons.arrow_drop_down, color: Colors.black),
 
                         prefixIconConstraints:
