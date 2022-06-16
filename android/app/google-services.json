@@ -1,41 +1,33 @@
 {
   "project_info": {
-    "project_number": "840531601779",
-    "project_id": "vrudi-97dda",
-    "storage_bucket": "vrudi-97dda.appspot.com"
+    "project_number": "293586756159",
+    "project_id": "vrudi-235c6",
+    "storage_bucket": "vrudi-235c6.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:840531601779:android:c9719dee5d5474391e7d06",
+        "mobilesdk_app_id": "1:293586756159:android:801c42f5daa9944dfece8a",
         "android_client_info": {
           "package_name": "com.vrudi"
         }
       },
       "oauth_client": [
         {
-          "client_id": "840531601779-n80oujprsrmqjusod5flfcodegv4e6m8.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.vrudi",
-            "certificate_hash": "874de9bc27a809316c89ccf4b1e49028c4911c87"
-          }
-        },
-        {
-          "client_id": "840531601779-71mbp6c8kq8oe297pd0eh1ou4qf6d2u6.apps.googleusercontent.com",
+          "client_id": "293586756159-8h2avgciarq2d6qu4piarpevosbhgpjj.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAEyXjCqflD_N6XPgVipHxqVLTu5DCXX5s"
+          "current_key": "AIzaSyDkJifJxB6T98j7QCof_oit20YqziZYv00"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "840531601779-71mbp6c8kq8oe297pd0eh1ou4qf6d2u6.apps.googleusercontent.com",
+              "client_id": "293586756159-8h2avgciarq2d6qu4piarpevosbhgpjj.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
