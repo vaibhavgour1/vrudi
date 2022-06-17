@@ -72,93 +72,102 @@ class _ChatScreenState extends State<ChatScreen> with WidgetsBindingObserver {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          title: const Text(
-            "User Search Screen",
-            style: TextStyle(fontSize: 16),
-          ),
+      appBar: AppBar(
+        centerTitle: true,
+        title: const Text(
+          "User Search Screen",
+          style: TextStyle(fontSize: 16),
         ),
-        body: loading
-            ? Center(
-                child: CircularProgressIndicator(),
-              )
-            : Container(
-                padding: const EdgeInsets.all(10),
-                child: Column(
-                  children: [
-                    TextFormField(
-                      keyboardType: TextInputType.emailAddress,
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      inputFormatters: [FilteringTextInputFormatter.singleLineFormatter],
-                      controller: serachController,
-                      onTap: () {},
-                      decoration: InputDecoration(
-                        filled: true,
-                        fillColor: const Color.fromRGBO(242, 242, 242, 1),
-                        counterText: "",
-                        hintText: "Enter Email",
-                        prefixIcon: const Icon(Icons.email, color: Colors.black),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        focusedBorder: const OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.red, width: 2),
-                        ),
-                        enabledBorder: const OutlineInputBorder(borderSide: const BorderSide(color: Colors.grey)),
-
-                        disabledBorder:
-                            OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
-
-                        errorBorder:
-                            OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
-                        focusedErrorBorder:
-                            OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
-                        prefixIconConstraints:
-                            const BoxConstraints(minWidth: 50, minHeight: 25, maxWidth: 51, maxHeight: 25),
-                        // errorText: Validator.validateMobile(edtMobile.text, context),
+      ),
+      body: loading
+          ? Center(
+              child: CircularProgressIndicator(),
+            )
+          : Container(
+              padding: const EdgeInsets.all(10),
+              child: Column(
+                children: [
+                  TextFormField(
+                    keyboardType: TextInputType.emailAddress,
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    inputFormatters: [FilteringTextInputFormatter.singleLineFormatter],
+                    controller: serachController,
+                    onTap: () {},
+                    decoration: InputDecoration(
+                      filled: true,
+                      fillColor: const Color.fromRGBO(242, 242, 242, 1),
+                      counterText: "",
+                      hintText: "Enter Email",
+                      prefixIcon: const Icon(Icons.email, color: Colors.black),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
                       ),
-                    ),
-                    SizedBox(
-                      height: size.height / 50,
-                    ),
-                    ElevatedButton(
-                      onPressed: onSerach,
-                      child: Text("Search"),
-                    ),
-                    userMap != null
-                        ? ListTile(
-                            onTap: () {
-                              //  log("_auth.currentUser!.displayName!${_auth.currentUser!.displayName!}");
-                              String roomId = chatRoomId(_auth.currentUser!.displayName!, userMap!['name']);
+                      focusedBorder: const OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.red, width: 2),
+                      ),
+                      enabledBorder: const OutlineInputBorder(borderSide: const BorderSide(color: Colors.grey)),
 
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (_) => ChatRoom(
-                                    chatRoomId: roomId,
-                                    userMap: userMap!,
-                                  ),
+                      disabledBorder:
+                          OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
+
+                      errorBorder:
+                          OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
+                      focusedErrorBorder:
+                          OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
+                      prefixIconConstraints:
+                          const BoxConstraints(minWidth: 50, minHeight: 25, maxWidth: 51, maxHeight: 25),
+                      // errorText: Validator.validateMobile(edtMobile.text, context),
+                    ),
+                  ),
+                  SizedBox(
+                    height: size.height / 50,
+                  ),
+                  ElevatedButton(
+                    onPressed: onSerach,
+                    child: Text("Search"),
+                  ),
+                  userMap != null
+                      ? ListTile(
+                          onTap: () {
+                            //  log("_auth.currentUser!.displayName!${_auth.currentUser!.displayName!}");
+                            String roomId = chatRoomId(_auth.currentUser!.displayName!, userMap!['name']);
+
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (_) => ChatRoom(
+                                  chatRoomId: roomId,
+                                  userMap: userMap!,
                                 ),
-                              );
-                            },
-                            leading: Icon(Icons.account_box, color: Colors.black),
-                            title: Text(
-                              userMap!['name'],
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 17,
-                                fontWeight: FontWeight.w500,
                               ),
+                            );
+                          },
+                          leading: Icon(Icons.account_box, color: Colors.black),
+                          title: Text(
+                            userMap!['name'],
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 17,
+                              fontWeight: FontWeight.w500,
                             ),
-                            subtitle: Text(userMap!['email']),
-                            trailing: Icon(Icons.chat, color: Colors.black),
-                          )
-                        : Container(),
-                    // BlocConsumer(builder: ((context, state) {
-                    //
-                    // }), listener: (context, state) {})
-                  ],
-                ),
-              ));
+                          ),
+                          subtitle: Text(userMap!['email']),
+                          trailing: Icon(Icons.chat, color: Colors.black),
+                        )
+                      : Container(),
+                  // BlocConsumer(builder: ((context, state) {
+                  //
+                  // }), listener: (context, state) {})
+                ],
+              ),
+            ),
+      //   floatingActionButton: FloatingActionButton(
+      //   child: Icon(Icons.group),
+      //   onPressed: () => Navigator.of(context).push(
+      //     MaterialPageRoute(
+      //       builder: (_) => GroupChatHomeScreen(),
+      //     ),
+      //   ),
+      // ),
+    );
   }
 }
