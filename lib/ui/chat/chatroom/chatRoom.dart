@@ -34,34 +34,35 @@ class ChatRoom extends StatelessWidget {
   Future uploadImage() async {
     String fileName = const Uuid().v1();
     int status = 1;
-
-    // await _firestore.collection('chatroom').doc(chatRoomId).collection('chats').doc(fileName).set({
-    //   "sendby": _auth.currentUser!.displayName,
-    //   "message": "",
-    //   "type": "img",
-    //   "time": FieldValue.serverTimestamp(),
-    // });
+//image url ko save kerna kai collection bnaya hai doc filneme randome doc ko genrate nhi kerna chta taki
+// value image milne kai bad update ker ske
+    await _firestore.collection('chatroom').doc(chatRoomId).collection('chats').doc(fileName).set({
+      "sendby": _auth.currentUser!.displayName,
+      "message": "",
+      "type": "img",
+      "time": FieldValue.serverTimestamp(),
+    });
 
     var ref = FirebaseStorage.instance.ref().child('images').child("$fileName.jpg");
-    var uploadTask = await ref.putFile(imageFile!);
-    // var uploadTask = await ref.putFile(imageFile!).catchError((error) async {
-    //   await _firestore.collection('chatroom').doc(chatRoomId).collection('chats').doc(fileName).delete();
-    //
-    //   status = 0;
-    // });
 
-    //if (status == 1) {
-    String imageUrl = await uploadTask.ref.getDownloadURL();
+    var uploadTask = await ref.putFile(imageFile!).catchError((error) async {
+      await _firestore.collection('chatroom').doc(chatRoomId).collection('chats').doc(fileName).delete();
 
-    // await _firestore
-    //     .collection('chatroom')
-    //     .doc(chatRoomId)
-    //     .collection('chats')
-    //     .doc(fileName)
-    //     .update({"message": imageUrl});
-    print("=======");
-    print(imageUrl);
-    // }
+      status = 0;
+    });
+
+    if (status == 1) {
+      String imageUrl = await uploadTask.ref.getDownloadURL();
+
+      await _firestore
+          .collection('chatroom')
+          .doc(chatRoomId)
+          .collection('chats')
+          .doc(fileName)
+          .update({"message": imageUrl});
+      print("=======");
+      print(imageUrl);
+    }
   }
 
   void onSendMessage() async {
@@ -69,6 +70,7 @@ class ChatRoom extends StatelessWidget {
       Map<String, dynamic> message = {
         "sendby": _auth.currentUser!.displayName,
         "message": _message.text,
+        "type": "text",
         "time": FieldValue.serverTimestamp(),
       };
       await _firestore.collection('chatroom').doc(chatRoomId).collection('chats').add(message);
@@ -209,53 +211,72 @@ class ChatRoom extends StatelessWidget {
   }
 
   Widget messages(Size size, Map<String, dynamic> map, BuildContext context) {
-    return Container(
+    return map['type'] == "text"
+        ? Container(
+            width: size.width,
+            alignment: map['sendby'] == _auth.currentUser!.displayName ? Alignment.centerRight : Alignment.centerLeft,
+            child: Container(
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 14),
+              margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 8),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+                color: Colors.red,
+              ),
+              child: Text(
+                map['message'],
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          )
+        : Container(
+            height: size.height / 2.5,
+            width: size.width,
+            padding: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
+            alignment: map['sendby'] == _auth.currentUser!.displayName ? Alignment.centerRight : Alignment.centerLeft,
+            child: InkWell(
+              onTap: () => Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (_) => ShowImage(
+                    imageUrl: map['message'],
+                  ),
+                ),
+              ),
+              child: Container(
+                height: size.height / 2.5,
+                width: size.width / 2,
+                decoration: BoxDecoration(border: Border.all()),
+                alignment: map['message'] != "" ? null : Alignment.center,
+                child: map['message'] != ""
+                    ? Image.network(
+                        map['message'],
+                        fit: BoxFit.cover,
+                      )
+                    : CircularProgressIndicator(
+                        color: Colors.red,
+                      ),
+              ),
+            ),
+          );
+  }
+}
+
+class ShowImage extends StatelessWidget {
+  final String imageUrl;
+  const ShowImage({required this.imageUrl, Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    return Scaffold(
+        body: Container(
+      height: size.height,
       width: size.width,
-      alignment: map['sendby'] == _auth.currentUser!.displayName ? Alignment.centerRight : Alignment.centerLeft,
-      child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 14),
-        margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 8),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(15),
-          color: Colors.red,
-        ),
-        child: Text(
-          map['message'],
-          style: const TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.w500,
-            color: Colors.white,
-          ),
-        ),
-      ),
-    );
-    // : Container(
-    //     height: size.height / 2.5,
-    //     width: size.width,
-    //     padding: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
-    //     alignment: map['sendby'] == _auth.currentUser!.displayName ? Alignment.centerRight : Alignment.centerLeft,
-    //     child: InkWell(
-    //       onTap: () {},
-    //       // onTap: () => Navigator.of(context).push(
-    //       //   MaterialPageRoute(
-    //       //     builder: (_) => ShowImage(
-    //       //       imageUrl: map['message'],
-    //       //     ),
-    //       //   ),
-    //
-    //       child: Container(
-    //         height: size.height / 2.5,
-    //         width: size.width / 2,
-    //         decoration: BoxDecoration(border: Border.all()),
-    //         alignment: map['message'] != "" ? null : Alignment.center,
-    //         child: map['message'] != ""
-    //             ? Image.network(
-    //                 map['message'],
-    //                 fit: BoxFit.cover,
-    //               )
-    //             : CircularProgressIndicator(),
-    //       ),
-    //     ),
-    //   );
+      color: Colors.black,
+      child: Image.network(imageUrl),
+    ));
   }
 }
