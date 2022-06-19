@@ -411,7 +411,7 @@ class _SignUpState extends State<SignUp> {
       Utility.showToast(msg: "Please Enter Usertype");
     } else {
       Map<String, dynamic> signUpInput = <String, dynamic>{};
-      signUpInput['email'] = "text";
+      signUpInput['email'] = email;
       signUpInput['password'] = password;
       signUpInput['username'] = username;
       signUpInput['name'] = name;
