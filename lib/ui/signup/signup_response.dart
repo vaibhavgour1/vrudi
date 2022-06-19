@@ -1,54 +1,54 @@
-
 import 'dart:convert';
 
 class SignUpResponse {
   SignUpResponse({
-    required this.id,
     required this.email,
-    required this.fullName,
-    required this.userName,
     required this.password,
+    required this.username,
+    required this.name,
+    required this.usertype,
+    required this.professional,
     required this.securityQuestion,
-    required this.securityQuestionAnswer,
-    required this.userType,
-    required this.industry,
+    required this.securityAnswer,
   });
-
-  String id;
   String email;
-  String fullName;
-  String userName;
   String password;
+  String username;
+  String name;
+  String usertype;
+  String professional;
   String securityQuestion;
-  String securityQuestionAnswer;
-  String userType;
-  String industry;
+  String securityAnswer;
 
-  factory SignUpResponse.fromJson(String str) => SignUpResponse.fromMap(json.decode(str));
+  factory SignUpResponse.fromJson(String str) =>
+      SignUpResponse.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
 
   factory SignUpResponse.fromMap(Map<String, dynamic> json) => SignUpResponse(
-    id: json["id"] == null ? "" : json["id"].toString(),
-    email: json["email"] == null ? "" : json["email"].toString(),
-    fullName: json["fullName"] == null ? "" : json["fullName"].toString(),
-    userName: json["userName"] == null ? "" : json["userName"].toString(),
-    password: json["password"] == null ? "" : json["password"].toString(),
-    securityQuestion: json["securityQuestion"] == null ? "" : json["securityQuestion"].toString(),
-    securityQuestionAnswer: json["securityQuestionAnswer"] == null ? "" : json["securityQuestionAnswer"].toString(),
-    userType: json["userType"] == null ? "" : json["userType"].toString(),
-    industry: json["industry"] == null ? "" : json["industry"].toString(),
-  );
+        email: json["email"] == null ? "" : json["email"].toString(),
+        password: json["password"] == null ? "" : json["password"].toString(),
+        username: json["username"] == null ? "" : json["username"].toString(),
+        name: json["name"] == null ? "" : json["name"].toString(),
+        usertype: json["usertype"] == null ? "" : json["usertype"].toString(),
+        professional:
+            json["professional"] == null ? "" : json["professional"].toString(),
+        securityQuestion: json["securityQuestion"] == null
+            ? ""
+            : json["securityQuestion"].toString(),
+        securityAnswer: json["securityAnswer"] == null
+            ? ""
+            : json["securityAnswer"].toString(),
+      );
 
   Map<String, dynamic> toMap() => {
-    "id": id == null ? null : id,
-    "email": email == null ? null : email,
-    "fullName": fullName == null ? null : fullName,
-    "userName": userName == null ? null : userName,
-    "password": password == null ? null : password,
-    "securityQuestion": securityQuestion == null ? null : securityQuestion,
-    "securityQuestionAnswer": securityQuestionAnswer == null ? null : securityQuestionAnswer,
-    "userType": userType == null ? null : userType,
-    "industry": industry == null ? null : industry,
-  };
+        "email": email == null ? null : email,
+        "password": password == null ? null : password,
+        "username": username == null ? null : username,
+        "name": name == null ? null : name,
+        "usertype": usertype == null ? null : usertype,
+        "professional": professional == null ? null : professional,
+        "securityQuestion": securityQuestion == null ? null : securityQuestion,
+        "securityAnswer": securityAnswer == null ? null : securityAnswer,
+      };
 }

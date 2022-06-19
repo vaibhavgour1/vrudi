@@ -17,15 +17,38 @@ class SignUpBloc extends Bloc<SignupEvent, SignUpState> {
   Stream<SignUpState> mapEventToState(SignupEvent event) async* {
     if (event is GetSignUpEvent) {
       yield SignUpInitialState();
-      yield* getSignup(event.input);
+      // yield* getSignup(event.input);
+      yield* getSignupForApi(event.input);
     }
   }
 
-  Stream<SignUpState> getSignup(Map<String, dynamic> input) async* {
+  // Stream<SignUpState> getSignup(Map<String, dynamic> input) async* {
+  //   if (await Network.isConnected()) {
+  //     print("lsignupevent ==> $input");
+  //     SignUpResponse result = await apiProvider.signup(input);
+  //     // if (result.id.isNotEmpty) {
+  //     //   EasyLoading.dismiss();
+  //     //   yield GetSignUpState(message: result);
+  //     //
+  //     //   log(">>>>>>>$result");
+  //     // }
+  //     // if (result.hasErrors) {
+  //     // }
+  //     else {
+  //       yield SignUpFailureState(message: "Error");
+  //     }
+  //   } else {
+  //     EasyLoading.dismiss();
+  //     Utility.showToast(msg: "please check your internet connection");
+  //   }
+  // }
+
+  Stream<SignUpState> getSignupForApi(Map<String, dynamic> input) async* {
     if (await Network.isConnected()) {
-      print("lsignupevent ==> $input");
+      print("getSignupForApi ==> $input");
       SignUpResponse result = await apiProvider.signup(input);
-      if (result.id.isNotEmpty) {
+
+      if (result.email.isNotEmpty) {
         EasyLoading.dismiss();
         yield GetSignUpState(message: result);
 

@@ -31,8 +31,9 @@ class ApiProvider {
   }
 
   Future<SignUpResponse> signup(Map<String, dynamic> input) async {
+    print(":signUP");
     Response res = await dio.post(Endpoint.SIGNUP, data: input);
-    log("$res");
+    log("res--$res");
     return SignUpResponse.fromJson(res.toString());
   }
 
