@@ -28,6 +28,12 @@ class _ChatScreenState extends State<ChatScreen> with WidgetsBindingObserver {
     //
   }
 
+  void setStatus(String status) async {
+    await _firestore.collection('users').doc(_auth.currentUser!.uid).update({
+      "status": status,
+    });
+    // log("===>${_firestore.collection('users').doc(_auth.currentUser!.uid).get()}");
+  }
   @override
   void didchangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.resumed) {
@@ -40,12 +46,6 @@ class _ChatScreenState extends State<ChatScreen> with WidgetsBindingObserver {
   }
 //jo ki hume wb observer provide kerta with help this we find the current state of the app
 
-  void setStatus(String status) async {
-    await _firestore.collection('users').doc(_auth.currentUser!.uid).update({
-      "status": status,
-    });
-    // log("===>${_firestore.collection('users').doc(_auth.currentUser!.uid).get()}");
-  }
 
   String chatRoomId(String user1, String user2) {
     if (user1[0].toLowerCase().codeUnits[0] > user2.toLowerCase().codeUnits[0]) {
