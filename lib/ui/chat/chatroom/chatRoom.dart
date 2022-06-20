@@ -198,8 +198,8 @@ class ChatRoom extends StatelessWidget {
                             )),
                       ),
                     ),
-                    // IconButton(
-                    //     icon: Icon(Icons.send), onPressed: onSendMessage),
+                    IconButton(
+                        icon: Icon(Icons.send), onPressed: onSendMessage),)
                   ],
                 ),
               ),
