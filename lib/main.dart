@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:vrudi/api/api_provider.dart';
 import 'package:vrudi/api/endpoints.dart';
@@ -29,7 +30,8 @@ ThemeData themeData = ThemeData(
     ),
     bottomSheetTheme: const BottomSheetThemeData(
         shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(topRight: Radius.circular(25), topLeft: Radius.circular(25)))),
+            borderRadius: BorderRadius.only(
+                topRight: Radius.circular(25), topLeft: Radius.circular(25)))),
     // accentTextTheme: Theme.of(context).textTheme,
     unselectedWidgetColor: Colors.black,
     fontFamily: GoogleFonts.openSans().fontFamily,
@@ -42,12 +44,24 @@ ThemeData themeData = ThemeData(
     ),
     inputDecorationTheme: InputDecorationTheme(
         hoverColor: Colors.red,
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
-        enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
-        disabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
-        focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
-        errorBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
-        focusedErrorBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
+        border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: BorderSide.none),
+        enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: BorderSide.none),
+        disabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: BorderSide.none),
+        focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: BorderSide.none),
+        errorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: BorderSide.none),
+        focusedErrorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: BorderSide.none),
 
         // filled: true,
         // fillColor: Color.fromRGBO(242, 242, 242, 1),
@@ -122,6 +136,7 @@ class _MyAppState extends State<MyApp> {
       theme: themeData,
       debugShowCheckedModeBanner: false,
       home: SplashScreen(),
+      builder: EasyLoading.init(),
     );
   }
 }

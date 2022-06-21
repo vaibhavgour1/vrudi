@@ -225,16 +225,16 @@ class _SignUpState extends State<SignUp> {
                             //     print("Login UnSuccesfulle");
                             //   }
                             // });
-
+                            Utility.showToast(msg: state.message);
                             Navigator.pushAndRemoveUntil(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => const LoginScreen()),
-                                (route) => true);
+                                (route) => false);
                           }
                           if (state is SignUpFailureState) {
                             Utility.showToast(
-                              msg: "Failed",
+                              msg: state.message,
                             );
                           }
                           if (state is SignUpInitialState) {
@@ -262,9 +262,9 @@ class _SignUpState extends State<SignUp> {
                                   password: passwordController.text,
                                   securityQuestion: securityController.text,
                                   username: usernameController.text,
-                                  professional: "test",
-                                  securityAnswer: "test",
-                                  usertype: "test");
+                                  professional: "text7",
+                                  securityAnswer: "text7",
+                                  usertype: "text7");
                             },
                             child: const Text(
                               "Next",
@@ -415,10 +415,10 @@ class _SignUpState extends State<SignUp> {
       signUpInput['password'] = password;
       signUpInput['username'] = username;
       signUpInput['name'] = name;
-      signUpInput['usertype'] = usertype;
-      signUpInput['professional'] = professional;
-      signUpInput['securityQuestion'] = securityQuestion;
-      signUpInput['securityAnswer'] = securityAnswer;
+      signUpInput['usertype'] = 'test9';
+      signUpInput['professional'] = 'test9';
+      signUpInput['securityQuestion'] = 'test9';
+      signUpInput['securityAnswer'] = 'test9';
       print("input-->$signUpInput");
       signUpBloc.add(GetSignUpEvent(input: signUpInput));
     }
