@@ -1,3 +1,4 @@
+import 'dart:collection';
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -8,6 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vrudi/ui/firebase/firebase_methods.dart';
 import 'package:vrudi/ui/login/login_scren.dart';
 import 'package:vrudi/ui/signup/bloc/signup_bloc.dart';
+import 'package:vrudi/ui/signup/bloc/signup_event.dart';
 import 'package:vrudi/ui/signup/bloc/signup_state.dart';
 import 'package:vrudi/utility/utilty.dart';
 import 'package:vrudi/utility/validator.dart';
@@ -70,10 +72,14 @@ class _SignUpState extends State<SignUp> {
                         fillColor: const Color.fromRGBO(242, 242, 242, 1),
                         counterText: "",
                         hintText: "Please Enter Email Id",
-                        prefixIcon: const Icon(Icons.email, color: Colors.black),
+                        prefixIcon:
+                            const Icon(Icons.email, color: Colors.black),
 
-                        prefixIconConstraints:
-                            const BoxConstraints(minWidth: 50, minHeight: 25, maxWidth: 51, maxHeight: 25),
+                        prefixIconConstraints: const BoxConstraints(
+                            minWidth: 50,
+                            minHeight: 25,
+                            maxWidth: 51,
+                            maxHeight: 25),
                         // errorText: Validator.validateMobile(edtMobile.text, context),
                       ),
                     ),
@@ -89,10 +95,14 @@ class _SignUpState extends State<SignUp> {
                         fillColor: const Color.fromRGBO(242, 242, 242, 1),
                         counterText: "",
                         hintText: "Please Enter Full name",
-                        prefixIcon: const Icon(Icons.person, color: Colors.black),
+                        prefixIcon:
+                            const Icon(Icons.person, color: Colors.black),
 
-                        prefixIconConstraints:
-                            const BoxConstraints(minWidth: 50, minHeight: 25, maxWidth: 51, maxHeight: 25),
+                        prefixIconConstraints: const BoxConstraints(
+                            minWidth: 50,
+                            minHeight: 25,
+                            maxWidth: 51,
+                            maxHeight: 25),
                         // errorText: Validator.validateMobile(edtMobile.text, context),
                       ),
                     ),
@@ -108,10 +118,14 @@ class _SignUpState extends State<SignUp> {
                         fillColor: const Color.fromRGBO(242, 242, 242, 1),
                         counterText: "",
                         hintText: "Please Enter User Name",
-                        prefixIcon: const Icon(Icons.supervised_user_circle, color: Colors.black),
+                        prefixIcon: const Icon(Icons.supervised_user_circle,
+                            color: Colors.black),
 
-                        prefixIconConstraints:
-                            const BoxConstraints(minWidth: 50, minHeight: 25, maxWidth: 51, maxHeight: 25),
+                        prefixIconConstraints: const BoxConstraints(
+                            minWidth: 50,
+                            minHeight: 25,
+                            maxWidth: 51,
+                            maxHeight: 25),
                         // errorText: Validator.validateMobile(edtMobile.text, context),
                       ),
                     ),
@@ -122,7 +136,9 @@ class _SignUpState extends State<SignUp> {
                       keyboardType: TextInputType.visiblePassword,
                       validator: (numb) => Validator.passwordValidator(numb!),
                       autovalidateMode: AutovalidateMode.onUserInteraction,
-                      inputFormatters: [FilteringTextInputFormatter.singleLineFormatter],
+                      inputFormatters: [
+                        FilteringTextInputFormatter.singleLineFormatter
+                      ],
                       controller: passwordController,
                       decoration: InputDecoration(
                         filled: true,
@@ -131,8 +147,11 @@ class _SignUpState extends State<SignUp> {
                         hintText: "Please Enter Password",
                         prefixIcon: const Icon(Icons.key, color: Colors.black),
 
-                        prefixIconConstraints:
-                            const BoxConstraints(minWidth: 50, minHeight: 25, maxWidth: 51, maxHeight: 25),
+                        prefixIconConstraints: const BoxConstraints(
+                            minWidth: 50,
+                            minHeight: 25,
+                            maxWidth: 51,
+                            maxHeight: 25),
                         // errorText: Validator.validateMobile(edtMobile.text, context),
                       ),
                     ),
@@ -143,7 +162,9 @@ class _SignUpState extends State<SignUp> {
                       keyboardType: TextInputType.visiblePassword,
                       validator: (numb) => Validator.passwordValidator(numb!),
                       autovalidateMode: AutovalidateMode.onUserInteraction,
-                      inputFormatters: [FilteringTextInputFormatter.singleLineFormatter],
+                      inputFormatters: [
+                        FilteringTextInputFormatter.singleLineFormatter
+                      ],
                       controller: confirmController,
                       decoration: InputDecoration(
                         filled: true,
@@ -152,8 +173,11 @@ class _SignUpState extends State<SignUp> {
                         hintText: "Please Enter Password Again",
                         prefixIcon: const Icon(Icons.key, color: Colors.black),
 
-                        prefixIconConstraints:
-                            const BoxConstraints(minWidth: 50, minHeight: 25, maxWidth: 51, maxHeight: 25),
+                        prefixIconConstraints: const BoxConstraints(
+                            minWidth: 50,
+                            minHeight: 25,
+                            maxWidth: 51,
+                            maxHeight: 25),
                         // errorText: Validator.validateMobile(edtMobile.text, context),
                       ),
                     ),
@@ -171,10 +195,14 @@ class _SignUpState extends State<SignUp> {
                         fillColor: const Color.fromRGBO(242, 242, 242, 1),
                         counterText: "",
                         hintText: "select fav Color",
-                        prefixIcon: const Icon(Icons.arrow_drop_down, color: Colors.black),
+                        prefixIcon: const Icon(Icons.arrow_drop_down,
+                            color: Colors.black),
 
-                        prefixIconConstraints:
-                            const BoxConstraints(minWidth: 50, minHeight: 25, maxWidth: 51, maxHeight: 25),
+                        prefixIconConstraints: const BoxConstraints(
+                            minWidth: 50,
+                            minHeight: 25,
+                            maxWidth: 51,
+                            maxHeight: 25),
                         // errorText: Validator.validateMobile(edtMobile.text, context),
                       ),
                     ),
@@ -186,27 +214,35 @@ class _SignUpState extends State<SignUp> {
                         listener: (context, state) {
                           log("sate====>$state");
                           if (state is GetSignUpState) {
-                            createAccount(nameController.text, emailController.text, passwordController.text)
-                                .then((user) async {
-                              if (user != null) {
-                                print("Login Succesfulle");
-
-                                Navigator.pushAndRemoveUntil(context,
-                                    MaterialPageRoute(builder: (context) => const LoginScreen()), (route) => true);
-                              } else {
-                                print("Login UnSuccesfulle");
-                              }
-                            });
+                            // createAccount(nameController.text, emailController.text, passwordController.text)
+                            //     .then((user) async {
+                            //   if (user != null) {
+                            //     print("Login Succesfulle");
+                            //
+                            //     Navigator.pushAndRemoveUntil(context,
+                            //         MaterialPageRoute(builder: (context) => const LoginScreen()), (route) => true);
+                            //   } else {
+                            //     print("Login UnSuccesfulle");
+                            //   }
+                            // });
+                            Utility.showToast(msg: state.message);
+                            Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const LoginScreen()),
+                                (route) => false);
                           }
                           if (state is SignUpFailureState) {
                             Utility.showToast(
-                              msg: "Failed",
+                              msg: state.message,
                             );
                           }
                           if (state is SignUpInitialState) {
                             Container(
-                                height: MediaQuery.of(context).size.height * 0.70,
-                                child: Center(child: CircularProgressIndicator()));
+                                height:
+                                    MediaQuery.of(context).size.height * 0.70,
+                                child:
+                                    Center(child: CircularProgressIndicator()));
                           }
                         },
                         builder: (context, state) {
@@ -216,14 +252,26 @@ class _SignUpState extends State<SignUp> {
                             padding: const EdgeInsets.all(8.0),
                             textColor: Colors.white,
                             color: Colors.orange,
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10)),
                             onPressed: () {
-                              signUpEvent();
+                              // signUpEvent();
+                              signUp(
+                                  email: emailController.text,
+                                  name: nameController.text,
+                                  password: passwordController.text,
+                                  securityQuestion: securityController.text,
+                                  username: usernameController.text,
+                                  professional: "text7",
+                                  securityAnswer: "text7",
+                                  usertype: "text7");
                             },
                             child: const Text(
                               "Next",
-                              style:
-                                  TextStyle(fontSize: 19, fontWeight: FontWeight.w600, decoration: TextDecoration.none),
+                              style: TextStyle(
+                                  fontSize: 19,
+                                  fontWeight: FontWeight.w600,
+                                  decoration: TextDecoration.none),
                             ),
                           );
                         }),
@@ -252,12 +300,16 @@ class _SignUpState extends State<SignUp> {
   }
 
   signUpEvent() async {
-    createAccount(nameController.text, emailController.text, passwordController.text).then((user) async {
+    createAccount(
+            nameController.text, emailController.text, passwordController.text)
+        .then((user) async {
       if (user != null) {
         print("Login Succesfulle");
 
         Navigator.pushAndRemoveUntil(
-            context, MaterialPageRoute(builder: (context) => const LoginScreen()), (route) => true);
+            context,
+            MaterialPageRoute(builder: (context) => const LoginScreen()),
+            (route) => true);
       } else {
         print("Login UnSuccesfulle");
       }
@@ -293,7 +345,8 @@ class _SignUpState extends State<SignUp> {
     showModalBottomSheet(
         context: context,
         shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20))),
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(20), topRight: Radius.circular(20))),
         builder: (context) {
           return Container(
             child: Column(
@@ -335,5 +388,39 @@ class _SignUpState extends State<SignUp> {
             ),
           );
         });
+  }
+
+  void signUp(
+      {required String email,
+      required String password,
+      required String username,
+      required String name,
+      required String usertype,
+      required String professional,
+      required String securityQuestion,
+      required String securityAnswer}) {
+    if (email.isEmpty) {
+      Utility.showToast(msg: "Please Enter Email");
+    } else if (password.isEmpty) {
+      Utility.showToast(msg: "Please Enter Password");
+    } else if (username.isEmpty) {
+      Utility.showToast(msg: "Please Enter Username");
+    } else if (name.isEmpty) {
+      Utility.showToast(msg: "Please Enter Name");
+    } else if (usertype.isEmpty) {
+      Utility.showToast(msg: "Please Enter Usertype");
+    } else {
+      Map<String, dynamic> signUpInput = <String, dynamic>{};
+      signUpInput['email'] = email;
+      signUpInput['password'] = password;
+      signUpInput['username'] = username;
+      signUpInput['name'] = name;
+      signUpInput['usertype'] = 'test9';
+      signUpInput['professional'] = 'test9';
+      signUpInput['securityQuestion'] = 'test9';
+      signUpInput['securityAnswer'] = 'test9';
+      print("input-->$signUpInput");
+      signUpBloc.add(GetSignUpEvent(input: signUpInput));
+    }
   }
 }

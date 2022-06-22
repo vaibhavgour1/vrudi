@@ -17,24 +17,49 @@ class SignUpBloc extends Bloc<SignupEvent, SignUpState> {
   Stream<SignUpState> mapEventToState(SignupEvent event) async* {
     if (event is GetSignUpEvent) {
       yield SignUpInitialState();
-      yield* getSignup(event.input);
+      // yield* getSignup(event.input);
+      yield* getSignupForApi(event.input);
     }
   }
 
-  Stream<SignUpState> getSignup(Map<String, dynamic> input) async* {
-    if (await Network.isConnected()) {
-      print("lsignupevent ==> $input");
-      SignUpResponse result = await apiProvider.signup(input);
-      if (result.id.isNotEmpty) {
-        EasyLoading.dismiss();
-        yield GetSignUpState(message: result);
+  // Stream<SignUpState> getSignup(Map<String, dynamic> input) async* {
+  //   if (await Network.isConnected()) {
+  //     print("lsignupevent ==> $input");
+  //     SignUpResponse result = await apiProvider.signup(input);
+  //     // if (result.id.isNotEmpty) {
+  //     //   EasyLoading.dismiss();
+  //     //   yield GetSignUpState(message: result);
+  //     //
+  //     //   log(">>>>>>>$result");
+  //     // }
+  //     // if (result.hasErrors) {
+  //     // }
+  //     else {
+  //       yield SignUpFailureState(message: "Error");
+  //     }
+  //   } else {
+  //     EasyLoading.dismiss();
+  //     Utility.showToast(msg: "please check your internet connection");
+  //   }
+  // }
 
-        log(">>>>>>>$result");
-      }
-      // if (result.hasErrors) {
-      // }
-      else {
-        yield SignUpFailureState(message: "Error");
+  Stream<SignUpState> getSignupForApi(Map<String, dynamic> input) async* {
+    EasyLoading.show();
+    if (await Network.isConnected()) {
+      try {
+        print("getSignupForApi ==> $input");
+        SignUpResponse result = await apiProvider.signup(input);
+        print("result ==> $result");
+        if (result.success) {
+          EasyLoading.dismiss();
+          yield GetSignUpState(message: result.message);
+          log(">>>>>>>$result");
+        } else {
+          yield SignUpFailureState(message: "Error");
+        }
+      } catch (e) {
+        EasyLoading.dismiss();
+        yield SignUpFailureState(message: "Internal Server Error");
       }
     } else {
       EasyLoading.dismiss();
