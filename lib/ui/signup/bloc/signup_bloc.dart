@@ -44,7 +44,7 @@ class SignUpBloc extends Bloc<SignupEvent, SignUpState> {
   // }
 
   Stream<SignUpState> getSignupForApi(Map<String, dynamic> input) async* {
-    EasyLoading.show();
+    //EasyLoading.show();
     if (await Network.isConnected()) {
       try {
         print("getSignupForApi ==> $input");
