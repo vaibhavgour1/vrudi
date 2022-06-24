@@ -63,7 +63,7 @@ class _SignUpState extends State<SignUp> {
                       ),
                     ),
                     SizedBox(
-                      height: deviceHeight * 0.05,
+                      height: deviceHeight * 0.02,
                     ),
                     TextFormField(
                       validator: (numb) => Validator.emailValidator(numb!),
@@ -196,7 +196,7 @@ class _SignUpState extends State<SignUp> {
                         filled: true,
                         fillColor: Color.fromRGBO(242, 242, 242, 1),
                         counterText: "",
-                        hintText: "select fav Color",
+                        hintText: "Select your Fav Color",
                         prefixIcon: Icon(Icons.arrow_drop_down,
                             color: Colors.black),
 
@@ -209,7 +209,7 @@ class _SignUpState extends State<SignUp> {
                       ),
                     ),
                     const SizedBox(
-                      height: 40,
+                      height: 10,
                     ),
                     TextFormField(
                         readOnly: true,
@@ -217,26 +217,24 @@ class _SignUpState extends State<SignUp> {
                           bottomSheetUserTypr();
                         },
                         keyboardType: TextInputType.visiblePassword,
-                        validator: (numb) => Validator.passwordValidator(numb!),
-                        autovalidateMode: AutovalidateMode.onUserInteraction,
-                        inputFormatters: [FilteringTextInputFormatter.singleLineFormatter],
+
                         controller: userTypeController,
                         decoration: const InputDecoration(
                           filled: true,
                           fillColor: Color.fromRGBO(242, 242, 242, 1),
                           counterText: "",
                           hintText: "Please Select User Type",
-                          suffixIcon: Icon(Icons.arrow_drop_down, color: Colors.black),
-                          prefix: Text("  "),
+                          prefixIcon: Icon(Icons.arrow_drop_down, color: Colors.black),
+
                           suffixIconConstraints: BoxConstraints(minWidth: 50, minHeight: 25, maxWidth: 51, maxHeight: 25),
                           // errorText: Validator.validateMobile(edtMobile.text, context),
                         ),
                       ),
 
                     const SizedBox(
-                      height: 20,
+                      height: 10,
                     ),
-                    TextFormField(
+                    userTypeController.text == "Employee"||userTypeController.text == "Client"?Container(): TextFormField(
                       readOnly: true,
                       onTap: () {
                         bottomSheetProfessional();
@@ -251,11 +249,14 @@ class _SignUpState extends State<SignUp> {
                         fillColor: Color.fromRGBO(242, 242, 242, 1),
                         counterText: "",
                         hintText: "Please Select User Professional",
-                        suffixIcon: Icon(Icons.arrow_drop_down, color: Colors.black),
-                        prefix: Text("  "),
+                        prefixIcon: Icon(Icons.arrow_drop_down, color: Colors.black),
+
                         suffixIconConstraints: BoxConstraints(minWidth: 50, minHeight: 25, maxWidth: 51, maxHeight: 25),
                         // errorText: Validator.validateMobile(edtMobile.text, context),
                       ),
+                    ),
+                    const SizedBox(
+                      height: 10,
                     ),
                     BlocConsumer<SignUpBloc, SignUpState>(
                         bloc: signUpBloc,
@@ -294,9 +295,9 @@ class _SignUpState extends State<SignUp> {
                                   password: passwordController.text,
                                   securityQuestion: securityController.text,
                                   username: usernameController.text,
-                                  professional: "text7",
-                                  securityAnswer: "text7",
-                                  usertype: "text7");
+                                  professional: professionalController.text,
+                                  securityAnswer: securityController.text,
+                                  usertype: usernameController.text);
                             },
                             child: const Text(
                               "Next",
@@ -346,6 +347,9 @@ class _SignUpState extends State<SignUp> {
                   onTap: () {
                     userTypeController.text = "Employee";
                     Navigator.pop(context);
+                    setState(() {
+
+                    });
                   },
                 ),
                 ListTile(
@@ -354,6 +358,9 @@ class _SignUpState extends State<SignUp> {
                   onTap: () {
                     userTypeController.text = "Professional";
                     Navigator.pop(context);
+                    setState(() {
+
+                    });
                   },
                 ),
                 ListTile(
@@ -362,6 +369,9 @@ class _SignUpState extends State<SignUp> {
                   onTap: () {
                     userTypeController.text = "Client";
                     Navigator.pop(context);
+                    setState(() {
+
+                    });
                   },
                 ),
               ],
@@ -375,91 +385,94 @@ class _SignUpState extends State<SignUp> {
         shape: const RoundedRectangleBorder(
             borderRadius: const BorderRadius.only(topLeft: const Radius.circular(20), topRight: Radius.circular(20))),
         builder: (context) {
-          return Container(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                ListTile(
-                  leading: new Icon(Icons.photo),
-                  title: new Text('Chartered Accountant'),
-                  onTap: () {
-                    professionalController.text = "Chartered Accountant";
-                    Navigator.pop(context);
-                  },
-                ),
-                ListTile(
-                  leading: new Icon(Icons.music_note),
-                  title: new Text('Designer'),
-                  onTap: () {
-                    professionalController.text = "Designer";
-                    Navigator.pop(context);
-                  },
-                ),
-                ListTile(
-                  leading: new Icon(Icons.videocam),
-                  title: new Text('Lawyer'),
-                  onTap: () {
-                    professionalController.text = "Lawyer";
-                    Navigator.pop(context);
-                  },
-                ),
-                ListTile(
-                  leading: new Icon(Icons.photo),
-                  title: new Text('Estate Agent'),
-                  onTap: () {
-                    professionalController.text = "Estate Agent";
-                    Navigator.pop(context);
-                  },
-                ),
-                ListTile(
-                  leading: new Icon(Icons.music_note),
-                  title: new Text('Photographer'),
-                  onTap: () {
-                    professionalController.text = "Photographer";
-                    Navigator.pop(context);
-                  },
-                ),
-                ListTile(
-                  leading: new Icon(Icons.videocam),
-                  title: new Text('Information Technology'),
-                  onTap: () {
-                    professionalController.text = "Information Technology";
-                    Navigator.pop(context);
-                  },
-                ),
-                ListTile(
-                  leading: new Icon(Icons.photo),
-                  title: new Text('Content Creator'),
-                  onTap: () {
-                    professionalController.text = "Content Creator";
-                    Navigator.pop(context);
-                  },
-                ),
-                ListTile(
-                  leading: new Icon(Icons.music_note),
-                  title: new Text('Builder'),
-                  onTap: () {
-                    professionalController.text = "Builder";
-                    Navigator.pop(context);
-                  },
-                ),
-                ListTile(
-                  leading: new Icon(Icons.videocam),
-                  title: new Text('Marketing Professional'),
-                  onTap: () {
-                    professionalController.text = "Marketing Professional";
-                    Navigator.pop(context);
-                  },
-                ),ListTile(
-                  leading: new Icon(Icons.videocam),
-                  title: new Text('Financial Consultant'),
-                  onTap: () {
-                    professionalController.text = "Financial Consultant";
-                    Navigator.pop(context);
-                  },
-                ),
-              ],
-            ),
+          return ListView(
+            children: [
+             Container(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  ListTile(
+                    leading: new Icon(Icons.photo),
+                    title: new Text('Chartered Accountant'),
+                    onTap: () {
+                      professionalController.text = "Chartered Accountant";
+                      Navigator.pop(context);
+                    },
+                  ),
+                  ListTile(
+                    leading: new Icon(Icons.music_note),
+                    title: new Text('Designer'),
+                    onTap: () {
+                      professionalController.text = "Designer";
+                      Navigator.pop(context);
+                    },
+                  ),
+                  ListTile(
+                    leading: new Icon(Icons.videocam),
+                    title: new Text('Lawyer'),
+                    onTap: () {
+                      professionalController.text = "Lawyer";
+                      Navigator.pop(context);
+                    },
+                  ),
+                  ListTile(
+                    leading: new Icon(Icons.photo),
+                    title: new Text('Estate Agent'),
+                    onTap: () {
+                      professionalController.text = "Estate Agent";
+                      Navigator.pop(context);
+                    },
+                  ),
+                  ListTile(
+                    leading: new Icon(Icons.music_note),
+                    title: new Text('Photographer'),
+                    onTap: () {
+                      professionalController.text = "Photographer";
+                      Navigator.pop(context);
+                    },
+                  ),
+                  ListTile(
+                    leading: new Icon(Icons.videocam),
+                    title: new Text('Information Technology'),
+                    onTap: () {
+                      professionalController.text = "Information Technology";
+                      Navigator.pop(context);
+                    },
+                  ),
+                  ListTile(
+                    leading: new Icon(Icons.photo),
+                    title: new Text('Content Creator'),
+                    onTap: () {
+                      professionalController.text = "Content Creator";
+                      Navigator.pop(context);
+                    },
+                  ),
+                  ListTile(
+                    leading: new Icon(Icons.music_note),
+                    title: new Text('Builder'),
+                    onTap: () {
+                      professionalController.text = "Builder";
+                      Navigator.pop(context);
+                    },
+                  ),
+                  ListTile(
+                    leading: new Icon(Icons.videocam),
+                    title: new Text('Marketing Professional'),
+                    onTap: () {
+                      professionalController.text = "Marketing Professional";
+                      Navigator.pop(context);
+                    },
+                  ),ListTile(
+                    leading: new Icon(Icons.videocam),
+                    title: new Text('Financial Consultant'),
+                    onTap: () {
+                      professionalController.text = "Financial Consultant";
+                      Navigator.pop(context);
+                    },
+                  ),
+                ],
+              ),
+            ),]
           );
         });
   }
@@ -468,14 +481,14 @@ class _SignUpState extends State<SignUp> {
             nameController.text, emailController.text, passwordController.text)
         .then((user) async {
       if (user != null) {
-        print("Login Succesfulle");
+        print("Signup Succesfulley");
 
         Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(builder: (context) => const LoginScreen()),
             (route) => true);
       } else {
-        print("Login UnSuccesfulle");
+        print("Signup UnSuccesfulle");
       }
     });
     // if (emailController.text.isEmpty) {
