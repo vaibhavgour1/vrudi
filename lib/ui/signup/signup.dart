@@ -491,31 +491,7 @@ class _SignUpState extends State<SignUp> {
         print("Signup UnSuccesfulle");
       }
     });
-    // if (emailController.text.isEmpty) {
-    //   Utility.showToast(msg: "Please Enter userName");
-    // } else if (nameController.text.isEmpty) {
-    //   Utility.showToast(msg: "Please Enter Password");
-    // } else if (usernameController.text.isEmpty) {
-    //   Utility.showToast(msg: "Please Enter Password");
-    // } else if (passwordController.text.isEmpty) {
-    //   Utility.showToast(msg: "Please Enter Password");
-    // } else if (confirmController.text.isEmpty) {
-    //   Utility.showToast(msg: "Please Enter Password");
-    // } else if (selectSecurityController.text.isEmpty) {
-    //   Utility.showToast(msg: "Please Enter Password");
-    // } else {
-    //   Map<String, dynamic> loginInput = Map<String, dynamic>();
-    //   loginInput["email"] = emailController.text;
-    //   loginInput["fullName"] = nameController.text;
-    //   loginInput["userName"] = usernameController.text;
-    //   loginInput["password"] = passwordController.text;
-    //   loginInput["securityQuestionAnswer"] = confirmController.text;
-    //   loginInput["securityQuestion"] = "select fav Colors";
-    //   loginInput["userType"] = "advocate";
-    //   loginInput["industry"] = "law";
-    //   log("loginInput====>$loginInput");
-    //   CircularProgressIndicator();
-    //   signUpBloc.add(GetSignUpEvent(input: loginInput));
+
   }
 
   void bottomSheet() {
@@ -592,10 +568,10 @@ class _SignUpState extends State<SignUp> {
       signUpInput['password'] = password;
       signUpInput['username'] = username;
       signUpInput['name'] = name;
-      signUpInput['usertype'] = 'test9';
-      signUpInput['professional'] = 'test9';
-      signUpInput['securityQuestion'] = 'test9';
-      signUpInput['securityAnswer'] = 'test9';
+      signUpInput['usertype'] = usertype;
+      signUpInput['professional'] = professional;
+      signUpInput['securityQuestion'] = 'Select your Fav Color';
+      signUpInput['securityAnswer'] = securityAnswer;
       print("input-->$signUpInput");
       signUpBloc.add(GetSignUpEvent(input: signUpInput));
     }
