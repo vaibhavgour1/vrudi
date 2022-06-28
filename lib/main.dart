@@ -8,7 +8,6 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:vrudi/api/api_provider.dart';
 import 'package:vrudi/api/endpoints.dart';
-import 'package:vrudi/text_ui/leave_creation.dart';
 import 'package:vrudi/ui/splash/splash.dart';
 
 BaseOptions baseOptions = BaseOptions(
@@ -136,7 +135,7 @@ class _MyAppState extends State<MyApp> {
       title: "Vrudi",
       theme: themeData,
       debugShowCheckedModeBanner: false,
-      home: LeaveCreation(),
+      home: SplashScreen(),
       builder: EasyLoading.init(),
     );
   }
