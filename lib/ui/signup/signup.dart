@@ -30,6 +30,8 @@ class _SignUpState extends State<SignUp> {
   TextEditingController confirmController = TextEditingController();
   TextEditingController selectSecurityController = TextEditingController();
   TextEditingController securityController = TextEditingController();
+  TextEditingController userTypeController = TextEditingController();
+  TextEditingController professionalController = TextEditingController();
   bool isLoading = false;
   FirebaseAuth _auth = FirebaseAuth.instance;
   FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
@@ -51,7 +53,7 @@ class _SignUpState extends State<SignUp> {
                 height: deviceHeight,
               ),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20),
+                padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Column(
                   children: [
                     Center(
@@ -61,21 +63,21 @@ class _SignUpState extends State<SignUp> {
                       ),
                     ),
                     SizedBox(
-                      height: deviceHeight * 0.05,
+                      height: deviceHeight * 0.02,
                     ),
                     TextFormField(
                       validator: (numb) => Validator.emailValidator(numb!),
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       controller: emailController,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         filled: true,
-                        fillColor: const Color.fromRGBO(242, 242, 242, 1),
+                        fillColor: Color.fromRGBO(242, 242, 242, 1),
                         counterText: "",
                         hintText: "Please Enter Email Id",
                         prefixIcon:
-                            const Icon(Icons.email, color: Colors.black),
+                            Icon(Icons.email, color: Colors.black),
 
-                        prefixIconConstraints: const BoxConstraints(
+                        prefixIconConstraints: BoxConstraints(
                             minWidth: 50,
                             minHeight: 25,
                             maxWidth: 51,
@@ -83,22 +85,22 @@ class _SignUpState extends State<SignUp> {
                         // errorText: Validator.validateMobile(edtMobile.text, context),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     TextFormField(
                       keyboardType: TextInputType.name,
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       controller: nameController,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         filled: true,
-                        fillColor: const Color.fromRGBO(242, 242, 242, 1),
+                        fillColor: Color.fromRGBO(242, 242, 242, 1),
                         counterText: "",
                         hintText: "Please Enter Full name",
                         prefixIcon:
-                            const Icon(Icons.person, color: Colors.black),
+                            Icon(Icons.person, color: Colors.black),
 
-                        prefixIconConstraints: const BoxConstraints(
+                        prefixIconConstraints: BoxConstraints(
                             minWidth: 50,
                             minHeight: 25,
                             maxWidth: 51,
@@ -106,22 +108,22 @@ class _SignUpState extends State<SignUp> {
                         // errorText: Validator.validateMobile(edtMobile.text, context),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     TextFormField(
                       keyboardType: TextInputType.name,
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       controller: usernameController,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         filled: true,
-                        fillColor: const Color.fromRGBO(242, 242, 242, 1),
+                        fillColor: Color.fromRGBO(242, 242, 242, 1),
                         counterText: "",
                         hintText: "Please Enter User Name",
-                        prefixIcon: const Icon(Icons.supervised_user_circle,
+                        prefixIcon: Icon(Icons.supervised_user_circle,
                             color: Colors.black),
 
-                        prefixIconConstraints: const BoxConstraints(
+                        prefixIconConstraints: BoxConstraints(
                             minWidth: 50,
                             minHeight: 25,
                             maxWidth: 51,
@@ -129,7 +131,7 @@ class _SignUpState extends State<SignUp> {
                         // errorText: Validator.validateMobile(edtMobile.text, context),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     TextFormField(
@@ -140,14 +142,14 @@ class _SignUpState extends State<SignUp> {
                         FilteringTextInputFormatter.singleLineFormatter
                       ],
                       controller: passwordController,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         filled: true,
-                        fillColor: const Color.fromRGBO(242, 242, 242, 1),
+                        fillColor: Color.fromRGBO(242, 242, 242, 1),
                         counterText: "",
                         hintText: "Please Enter Password",
-                        prefixIcon: const Icon(Icons.key, color: Colors.black),
+                        prefixIcon: Icon(Icons.key, color: Colors.black),
 
-                        prefixIconConstraints: const BoxConstraints(
+                        prefixIconConstraints: BoxConstraints(
                             minWidth: 50,
                             minHeight: 25,
                             maxWidth: 51,
@@ -155,7 +157,7 @@ class _SignUpState extends State<SignUp> {
                         // errorText: Validator.validateMobile(edtMobile.text, context),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     TextFormField(
@@ -166,39 +168,14 @@ class _SignUpState extends State<SignUp> {
                         FilteringTextInputFormatter.singleLineFormatter
                       ],
                       controller: confirmController,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         filled: true,
-                        fillColor: const Color.fromRGBO(242, 242, 242, 1),
+                        fillColor: Color.fromRGBO(242, 242, 242, 1),
                         counterText: "",
                         hintText: "Please Enter Password Again",
-                        prefixIcon: const Icon(Icons.key, color: Colors.black),
+                        prefixIcon: Icon(Icons.key, color: Colors.black),
 
-                        prefixIconConstraints: const BoxConstraints(
-                            minWidth: 50,
-                            minHeight: 25,
-                            maxWidth: 51,
-                            maxHeight: 25),
-                        // errorText: Validator.validateMobile(edtMobile.text, context),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    TextFormField(
-                      readOnly: true,
-                      onTap: () {
-                        bottomSheet();
-                      },
-                      controller: selectSecurityController,
-                      decoration: InputDecoration(
-                        filled: true,
-                        fillColor: const Color.fromRGBO(242, 242, 242, 1),
-                        counterText: "",
-                        hintText: "select fav Color",
-                        prefixIcon: const Icon(Icons.arrow_drop_down,
-                            color: Colors.black),
-
-                        prefixIconConstraints: const BoxConstraints(
+                        prefixIconConstraints: BoxConstraints(
                             minWidth: 50,
                             minHeight: 25,
                             maxWidth: 51,
@@ -207,30 +184,86 @@ class _SignUpState extends State<SignUp> {
                       ),
                     ),
                     const SizedBox(
-                      height: 40,
+                      height: 10,
+                    ),
+                    TextFormField(
+                      readOnly: true,
+                      onTap: () {
+                        bottomSheet();
+                      },
+                      controller: selectSecurityController,
+                      decoration: const InputDecoration(
+                        filled: true,
+                        fillColor: Color.fromRGBO(242, 242, 242, 1),
+                        counterText: "",
+                        hintText: "Select your Fav Color",
+                        prefixIcon: Icon(Icons.arrow_drop_down,
+                            color: Colors.black),
+
+                        prefixIconConstraints: BoxConstraints(
+                            minWidth: 50,
+                            minHeight: 25,
+                            maxWidth: 51,
+                            maxHeight: 25),
+                        // errorText: Validator.validateMobile(edtMobile.text, context),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    TextFormField(
+                        readOnly: true,
+                        onTap: () {
+                          bottomSheetUserTypr();
+                        },
+                        keyboardType: TextInputType.visiblePassword,
+
+                        controller: userTypeController,
+                        decoration: const InputDecoration(
+                          filled: true,
+                          fillColor: Color.fromRGBO(242, 242, 242, 1),
+                          counterText: "",
+                          hintText: "Please Select User Type",
+                          prefixIcon: Icon(Icons.arrow_drop_down, color: Colors.black),
+
+                          suffixIconConstraints: BoxConstraints(minWidth: 50, minHeight: 25, maxWidth: 51, maxHeight: 25),
+                          // errorText: Validator.validateMobile(edtMobile.text, context),
+                        ),
+                      ),
+
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    userTypeController.text == "Employee"||userTypeController.text == "Client"?Container(): TextFormField(
+                      readOnly: true,
+                      onTap: () {
+                        bottomSheetProfessional();
+                      },
+                      keyboardType: TextInputType.visiblePassword,
+                      validator: (numb) => Validator.passwordValidator(numb!),
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      inputFormatters: [FilteringTextInputFormatter.singleLineFormatter],
+                      controller: professionalController,
+                      decoration: const InputDecoration(
+                        filled: true,
+                        fillColor: Color.fromRGBO(242, 242, 242, 1),
+                        counterText: "",
+                        hintText: "Please Select User Professional",
+                        prefixIcon: Icon(Icons.arrow_drop_down, color: Colors.black),
+
+                        suffixIconConstraints: BoxConstraints(minWidth: 50, minHeight: 25, maxWidth: 51, maxHeight: 25),
+                        // errorText: Validator.validateMobile(edtMobile.text, context),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 10,
                     ),
                     BlocConsumer<SignUpBloc, SignUpState>(
                         bloc: signUpBloc,
                         listener: (context, state) {
                           log("sate====>$state");
                           if (state is GetSignUpState) {
-                            // createAccount(nameController.text, emailController.text, passwordController.text)
-                            //     .then((user) async {
-                            //   if (user != null) {
-                            //     print("Login Succesfulle");
-                            //
-                            //     Navigator.pushAndRemoveUntil(context,
-                            //         MaterialPageRoute(builder: (context) => const LoginScreen()), (route) => true);
-                            //   } else {
-                            //     print("Login UnSuccesfulle");
-                            //   }
-                            // });
-                            Utility.showToast(msg: state.message);
-                            Navigator.pushAndRemoveUntil(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const LoginScreen()),
-                                (route) => false);
+                            signUpEvent();
                           }
                           if (state is SignUpFailureState) {
                             Utility.showToast(
@@ -242,7 +275,7 @@ class _SignUpState extends State<SignUp> {
                                 height:
                                     MediaQuery.of(context).size.height * 0.70,
                                 child:
-                                    Center(child: CircularProgressIndicator()));
+                                    const Center(child: const CircularProgressIndicator()));
                           }
                         },
                         builder: (context, state) {
@@ -262,9 +295,9 @@ class _SignUpState extends State<SignUp> {
                                   password: passwordController.text,
                                   securityQuestion: securityController.text,
                                   username: usernameController.text,
-                                  professional: "text7",
-                                  securityAnswer: "text7",
-                                  usertype: "text7");
+                                  professional: professionalController.text,
+                                  securityAnswer: securityController.text,
+                                  usertype: usernameController.text);
                             },
                             child: const Text(
                               "Next",
@@ -298,47 +331,167 @@ class _SignUpState extends State<SignUp> {
       )),
     );
   }
+  void bottomSheetUserTypr() {
+    showModalBottomSheet(
+        context: context,
+        shape: const RoundedRectangleBorder(
+            borderRadius: const BorderRadius.only(topLeft: const Radius.circular(20), topRight: Radius.circular(20))),
+        builder: (context) {
+          return Container(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                ListTile(
+                  leading: new Icon(Icons.photo),
+                  title: new Text('Employee'),
+                  onTap: () {
+                    userTypeController.text = "Employee";
+                    Navigator.pop(context);
+                    setState(() {
 
+                    });
+                  },
+                ),
+                ListTile(
+                  leading: new Icon(Icons.music_note),
+                  title: new Text('Professional'),
+                  onTap: () {
+                    userTypeController.text = "Professional";
+                    Navigator.pop(context);
+                    setState(() {
+
+                    });
+                  },
+                ),
+                ListTile(
+                  leading: new Icon(Icons.videocam),
+                  title: new Text('Client'),
+                  onTap: () {
+                    userTypeController.text = "Client";
+                    Navigator.pop(context);
+                    setState(() {
+
+                    });
+                  },
+                ),
+              ],
+            ),
+          );
+        });
+  }
+  void bottomSheetProfessional() {
+    showModalBottomSheet(
+        context: context,
+        shape: const RoundedRectangleBorder(
+            borderRadius: const BorderRadius.only(topLeft: const Radius.circular(20), topRight: Radius.circular(20))),
+        builder: (context) {
+          return ListView(
+            children: [
+             Container(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  ListTile(
+                    leading: new Icon(Icons.photo),
+                    title: new Text('Chartered Accountant'),
+                    onTap: () {
+                      professionalController.text = "Chartered Accountant";
+                      Navigator.pop(context);
+                    },
+                  ),
+                  ListTile(
+                    leading: new Icon(Icons.music_note),
+                    title: new Text('Designer'),
+                    onTap: () {
+                      professionalController.text = "Designer";
+                      Navigator.pop(context);
+                    },
+                  ),
+                  ListTile(
+                    leading: new Icon(Icons.videocam),
+                    title: new Text('Lawyer'),
+                    onTap: () {
+                      professionalController.text = "Lawyer";
+                      Navigator.pop(context);
+                    },
+                  ),
+                  ListTile(
+                    leading: new Icon(Icons.photo),
+                    title: new Text('Estate Agent'),
+                    onTap: () {
+                      professionalController.text = "Estate Agent";
+                      Navigator.pop(context);
+                    },
+                  ),
+                  ListTile(
+                    leading: new Icon(Icons.music_note),
+                    title: new Text('Photographer'),
+                    onTap: () {
+                      professionalController.text = "Photographer";
+                      Navigator.pop(context);
+                    },
+                  ),
+                  ListTile(
+                    leading: new Icon(Icons.videocam),
+                    title: new Text('Information Technology'),
+                    onTap: () {
+                      professionalController.text = "Information Technology";
+                      Navigator.pop(context);
+                    },
+                  ),
+                  ListTile(
+                    leading: new Icon(Icons.photo),
+                    title: new Text('Content Creator'),
+                    onTap: () {
+                      professionalController.text = "Content Creator";
+                      Navigator.pop(context);
+                    },
+                  ),
+                  ListTile(
+                    leading: new Icon(Icons.music_note),
+                    title: new Text('Builder'),
+                    onTap: () {
+                      professionalController.text = "Builder";
+                      Navigator.pop(context);
+                    },
+                  ),
+                  ListTile(
+                    leading: new Icon(Icons.videocam),
+                    title: new Text('Marketing Professional'),
+                    onTap: () {
+                      professionalController.text = "Marketing Professional";
+                      Navigator.pop(context);
+                    },
+                  ),ListTile(
+                    leading: new Icon(Icons.videocam),
+                    title: new Text('Financial Consultant'),
+                    onTap: () {
+                      professionalController.text = "Financial Consultant";
+                      Navigator.pop(context);
+                    },
+                  ),
+                ],
+              ),
+            ),]
+          );
+        });
+  }
   signUpEvent() async {
     createAccount(
             nameController.text, emailController.text, passwordController.text)
         .then((user) async {
       if (user != null) {
-        print("Login Succesfulle");
+        print("Signup Succesfulley");
 
         Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(builder: (context) => const LoginScreen()),
             (route) => true);
       } else {
-        print("Login UnSuccesfulle");
+        print("Signup UnSuccesfulle");
       }
     });
-    // if (emailController.text.isEmpty) {
-    //   Utility.showToast(msg: "Please Enter userName");
-    // } else if (nameController.text.isEmpty) {
-    //   Utility.showToast(msg: "Please Enter Password");
-    // } else if (usernameController.text.isEmpty) {
-    //   Utility.showToast(msg: "Please Enter Password");
-    // } else if (passwordController.text.isEmpty) {
-    //   Utility.showToast(msg: "Please Enter Password");
-    // } else if (confirmController.text.isEmpty) {
-    //   Utility.showToast(msg: "Please Enter Password");
-    // } else if (selectSecurityController.text.isEmpty) {
-    //   Utility.showToast(msg: "Please Enter Password");
-    // } else {
-    //   Map<String, dynamic> loginInput = Map<String, dynamic>();
-    //   loginInput["email"] = emailController.text;
-    //   loginInput["fullName"] = nameController.text;
-    //   loginInput["userName"] = usernameController.text;
-    //   loginInput["password"] = passwordController.text;
-    //   loginInput["securityQuestionAnswer"] = confirmController.text;
-    //   loginInput["securityQuestion"] = "select fav Colors";
-    //   loginInput["userType"] = "advocate";
-    //   loginInput["industry"] = "law";
-    //   log("loginInput====>$loginInput");
-    //   CircularProgressIndicator();
-    //   signUpBloc.add(GetSignUpEvent(input: loginInput));
+
   }
 
   void bottomSheet() {
@@ -415,10 +568,10 @@ class _SignUpState extends State<SignUp> {
       signUpInput['password'] = password;
       signUpInput['username'] = username;
       signUpInput['name'] = name;
-      signUpInput['usertype'] = 'test9';
-      signUpInput['professional'] = 'test9';
-      signUpInput['securityQuestion'] = 'test9';
-      signUpInput['securityAnswer'] = 'test9';
+      signUpInput['usertype'] = usertype;
+      signUpInput['professional'] = professional;
+      signUpInput['securityQuestion'] = 'Select your Fav Color';
+      signUpInput['securityAnswer'] = securityAnswer;
       print("input-->$signUpInput");
       signUpBloc.add(GetSignUpEvent(input: signUpInput));
     }

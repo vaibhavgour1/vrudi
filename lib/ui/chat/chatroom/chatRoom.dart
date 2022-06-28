@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -151,8 +150,8 @@ class ChatRoom extends StatelessWidget {
                 child: Row(
                   children: [
                     Container(
-                      height: size.height / 12,
-                      width: size.width * 0.75,
+                      height: size.height / 17,
+                      width: size.width / 1.3,
                       child: TextFormField(
                           controller: _message,
                           decoration: InputDecoration(
@@ -172,38 +171,38 @@ class ChatRoom extends StatelessWidget {
                 ),
               ),
             ),
-            Container(
-              height: size.height / 10,
-              width: size.width,
-              alignment: Alignment.center,
-              child: Container(
-                height: size.height / 12,
-                width: size.width / 1.1,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      height: size.height / 17,
-                      width: size.width / 1.3,
-                      child: TextField(
-                        controller: _message,
-                        decoration: InputDecoration(
-                            suffixIcon: IconButton(
-                              onPressed: () => getImage(),
-                              icon: Icon(Icons.photo),
-                            ),
-                            hintText: "Send Message",
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8),
-                            )),
-                      ),
-                    ),
-                    // IconButton(
-                    //     icon: Icon(Icons.send), onPressed: onSendMessage),
-                  ],
-                ),
-              ),
-            ),
+            // Container(
+            //   height: size.height / 10,
+            //   width: size.width,
+            //   alignment: Alignment.center,
+            //   child: Container(
+            //     height: size.height / 12,
+            //     width: size.width / 1.1,
+            //     child: Row(
+            //       mainAxisAlignment: MainAxisAlignment.center,
+            //       children: [
+            //         Container(
+            //           height: size.height / 17,
+            //           width: size.width / 1.3,
+            //           child: TextField(
+            //             controller: _message,
+            //             decoration: InputDecoration(
+            //                 suffixIcon: IconButton(
+            //                   onPressed: () => getImage(),
+            //                   icon: Icon(Icons.photo),
+            //                 ),
+            //                 hintText: "Send Message",
+            //                 border: OutlineInputBorder(
+            //                   borderRadius: BorderRadius.circular(8),
+            //                 )),
+            //           ),
+            //         ),
+            //         IconButton(
+            //             icon: Icon(Icons.send), onPressed: onSendMessage)
+            //       ],
+            //     ),
+            //   ),
+            // ),
           ],
         ),
       ),
