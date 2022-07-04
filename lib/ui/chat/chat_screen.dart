@@ -161,7 +161,7 @@ class _ChatScreenState extends State<ChatScreen> with WidgetsBindingObserver {
                 ],
               ),
             ),
-        floatingActionButton: FloatingActionButton(
+      floatingActionButton: FloatingActionButton(
         child: Icon(Icons.group),
         onPressed: () => Navigator.of(context).push(
           MaterialPageRoute(
