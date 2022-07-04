@@ -44,22 +44,22 @@ class SignUpBloc extends Bloc<SignupEvent, SignUpState> {
   // }
 
   Stream<SignUpState> getSignupForApi(Map<String, dynamic> input) async* {
-    // EasyLoading.show();
+    //EasyLoading.show();
     if (await Network.isConnected()) {
-      print("getSignupForApi ==> $input");
-      SignUpResponse result = await apiProvider.signup(input);
-      print("result ==> $result");
-
-      if (result.email.isNotEmpty) {
+      try {
+        print("getSignupForApi ==> $input");
+        SignUpResponse result = await apiProvider.signup(input);
+        print("result ==> $result");
+        if (result.success) {
+          EasyLoading.dismiss();
+          yield GetSignUpState(message: result.message);
+          log(">>>>>>>$result");
+        } else {
+          yield SignUpFailureState(message: "Error");
+        }
+      } catch (e) {
         EasyLoading.dismiss();
-        yield GetSignUpState(message: result);
-
-        log(">>>>>>>$result");
-      }
-      // if (result.hasErrors) {
-      // }
-      else {
-        yield SignUpFailureState(message: "Error");
+        yield SignUpFailureState(message: "Internal Server Error");
       }
     } else {
       EasyLoading.dismiss();

@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:vrudi/api/endpoints.dart';
 import 'package:vrudi/main.dart';
 import 'package:vrudi/ui/clientinputform/model/client_response.dart';
@@ -32,9 +33,11 @@ class ApiProvider {
 
   Future<SignUpResponse> signup(Map<String, dynamic> input) async {
     print(":signUP");
+    var myres = '';
     Response res = await dio.post(Endpoint.SIGNUP, data: input);
-    log("res--$res");
-    return SignUpResponse.fromJson(res.toString());
+    myres = res.toString();
+    log("res--$myres");
+    return signUpResponseFromMap(res.toString());
   }
 
   Future<ForgetPasswordResponse> resetPassword(

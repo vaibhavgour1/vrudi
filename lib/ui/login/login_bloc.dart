@@ -35,7 +35,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           SharedPref.TOKEN, result.data!.dataObject!.token!);
       EasyLoading.dismiss();
       log("$result");
-      if (result.success == false) {
+      if (result.success == true) {
         yield GetLoginState(message: result.message);
       } else {
         yield GetLoginFailureState(message: result.message!);

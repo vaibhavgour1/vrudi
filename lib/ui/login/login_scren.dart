@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -5,6 +7,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:vrudi/ui/firebase/firebase_methods.dart';
 import 'package:vrudi/ui/home/home.dart';
 import 'package:vrudi/ui/login/login_bloc.dart';
+import 'package:vrudi/ui/login/login_event.dart';
 import 'package:vrudi/ui/login/login_state.dart';
 import 'package:vrudi/ui/selectfavColor/select_fav.dart';
 import 'package:vrudi/ui/signup/signup.dart';
@@ -35,23 +38,8 @@ class _LoginScreenState extends State<LoginScreen> {
       Map<String, dynamic> loginInput = <String, dynamic>{};
       loginInput["userId"] = username;
       loginInput["password"] = password;
-      login(emailController.text, passwordController.text).then((user) {
-        if (user != null) {
-          print("Login Succesfulle");
-          login(emailController.text, passwordController.text).then((user) {
-            if (user != null) {
-              print("Login Succesfulle");
-              Navigator.pushAndRemoveUntil(
-                  context, MaterialPageRoute(builder: (context) => const HomeScreen()), (route) => true);
-            } else {
-              print("Login UnSuccesfulle");
-            }
-          });
-        } else {
-          print("Login UnSuccesfulle");
-        }
-      });
-      //loginBloc.add(GetLoginEvent(input: loginInput));
+
+      loginBloc.add(GetLoginEvent(input: loginInput));
     }
   }
 
@@ -73,6 +61,7 @@ class _LoginScreenState extends State<LoginScreen> {
       child: BlocConsumer<LoginBloc, LoginState>(
         bloc: loginBloc,
         listener: (context, state) async {
+          log("sate====>$state");
           if (state is GetLoginState) {
             login(emailController.text, passwordController.text).then((user) {
               if (user != null) {

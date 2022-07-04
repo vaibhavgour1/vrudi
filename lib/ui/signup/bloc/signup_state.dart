@@ -8,7 +8,7 @@ class SignUpInitialState extends SignUpState {
 }
 
 class GetSignUpState extends SignUpState {
-  final message;
+  final String message;
   GetSignUpState({required this.message});
   @override
   List<Object?> get props => [message];
