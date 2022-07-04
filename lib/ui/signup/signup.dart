@@ -33,6 +33,7 @@ class _SignUpState extends State<SignUp> {
   TextEditingController userTypeController = TextEditingController();
   TextEditingController professionalController = TextEditingController();
   bool isLoading = false;
+  var email;
   FirebaseAuth _auth = FirebaseAuth.instance;
   FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
   @override
@@ -69,6 +70,17 @@ class _SignUpState extends State<SignUp> {
                       validator: (numb) => Validator.emailValidator(numb!),
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       controller: emailController,
+                      onTap: (){
+                        if(emailController.text.length>3) {
+                          email = emailController.text;
+
+                          usernameController.text =
+                              email.substring(0, email.lastIndexOf("@"));
+
+                          setState(() {
+
+                          });
+                        }},
                       decoration: const InputDecoration(
                         filled: true,
                         fillColor: Color.fromRGBO(242, 242, 242, 1),
@@ -312,7 +324,9 @@ class _SignUpState extends State<SignUp> {
                       height: 25,
                     ),
                     InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
                       child: const Text(
                         "Log In",
                         style: TextStyle(
@@ -379,6 +393,7 @@ class _SignUpState extends State<SignUp> {
           );
         });
   }
+
   void bottomSheetProfessional() {
     showModalBottomSheet(
         context: context,

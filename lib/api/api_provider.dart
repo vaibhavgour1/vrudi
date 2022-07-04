@@ -3,10 +3,12 @@ import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:vrudi/api/endpoints.dart';
+import 'package:vrudi/api/server_error.dart';
 import 'package:vrudi/main.dart';
 import 'package:vrudi/ui/clientinputform/model/client_response.dart';
 import 'package:vrudi/ui/login/model/login_response.dart';
 import 'package:vrudi/ui/selectfavColor/model/fav_model.dart';
+import 'package:vrudi/utility/utilty.dart';
 
 import '../ui/signup/signup_response.dart';
 
@@ -23,14 +25,27 @@ class ApiProvider {
     required Map<String, dynamic> input,
   }) async {
     log("$input");
-    Response res = await dio.get(Endpoint.LOGIN, queryParameters: {
-      "email": input["userId"],
-      "password": input["password"]
-    });
-    log("res--->$res");
-    return LoginResponse.fromJson(res.toString());
+    try {
+      Response res = await dio.get(Endpoint.LOGIN, queryParameters: {
+        "email": input["userId"],
+        "password": input["password"]
+      });
+      log("res--->$res");
+      return LoginResponse.fromJson(res.toString());
+    } catch (error) {
+      EasyLoading.dismiss();
+      String message = "";
+      if (error is DioError) {
+        ServerError e = ServerError.withError(error: error);
+        message = e.getErrorMessage();
+      } else {
+        message = "Please try again later!";
+      }
+      print("Exception occurred: $message stackTrace: $error");
+      Utility.showToast(msg: "$error");
+      return LoginResponse(success: false, message: message);
+    }
   }
-
   Future<SignUpResponse> signup(Map<String, dynamic> input) async {
     print(":signUP");
     var myres = '';

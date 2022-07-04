@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:vrudi/ui/firebase/firebase_methods.dart';
 import 'package:vrudi/ui/home/home.dart';
@@ -38,7 +39,7 @@ class _LoginScreenState extends State<LoginScreen> {
       Map<String, dynamic> loginInput = <String, dynamic>{};
       loginInput["userId"] = username;
       loginInput["password"] = password;
-
+      EasyLoading.show();
       loginBloc.add(GetLoginEvent(input: loginInput));
     }
   }
