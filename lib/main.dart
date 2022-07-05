@@ -12,8 +12,8 @@ import 'package:vrudi/ui/splash/splash.dart';
 
 BaseOptions baseOptions = BaseOptions(
   baseUrl: Endpoint.BASE_URL,
-  receiveTimeout: 60000,
-  sendTimeout: 60000,
+  receiveTimeout: 90000,
+  sendTimeout: 90000,
   responseType: ResponseType.json,
   maxRedirects: 3,
 );

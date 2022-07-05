@@ -70,17 +70,19 @@ class _SignUpState extends State<SignUp> {
                       validator: (numb) => Validator.emailValidator(numb!),
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       controller: emailController,
-                      onTap: (){
-                        if(emailController.text.length>3) {
-                          email = emailController.text;
+                      onChanged: (t){
+                        if(t.length>3) {
+                          email = t;
 
                           usernameController.text =
                               email.substring(0, email.lastIndexOf("@"));
 
-                          setState(() {
 
-                          });
-                        }},
+                        }else{
+                          usernameController.clear();
+                        }
+                      },
+
                       decoration: const InputDecoration(
                         filled: true,
                         fillColor: Color.fromRGBO(242, 242, 242, 1),
@@ -127,6 +129,7 @@ class _SignUpState extends State<SignUp> {
                       keyboardType: TextInputType.name,
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       controller: usernameController,
+                      readOnly: true,
                       decoration: const InputDecoration(
                         filled: true,
                         fillColor: Color.fromRGBO(242, 242, 242, 1),
