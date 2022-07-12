@@ -47,7 +47,7 @@ class _LeaveCreationState extends State<LeaveCreation> {
                 height: appHeight * 0.02,
               ),
               Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(padding: const EdgeInsets.only(left:20,right:20),
                  child: TextFormField(
@@ -72,12 +72,15 @@ class _LeaveCreationState extends State<LeaveCreation> {
                   SizedBox(
                     height: appHeight * 0.03,
                   ),
-                  const Text(
-                    "Deduction Type",
-                    style: TextStyle(
-                        fontSize: 18,
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold),
+                  Padding(padding: const EdgeInsets.only(left:20),
+
+                    child: const Text(
+                      "Deduction Type",
+                      style: TextStyle(
+                          fontSize: 18,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold),
+                    ),
                   ),
                   SizedBox(
                     height: appHeight * 0.002,
@@ -134,12 +137,15 @@ class _LeaveCreationState extends State<LeaveCreation> {
                   SizedBox(
                     height: appHeight * 0.005,
                   ),
-                  const Text(
-                    "Type Of Deduction",
-                    style: TextStyle(
-                        fontSize: 18,
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold),
+                  Padding(
+                    padding: const EdgeInsets.only(left:20),
+                    child: const Text(
+                      "Type Of Deduction",
+                      style: TextStyle(
+                          fontSize: 18,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold),
+                    ),
                   ),
                   SizedBox(
                     height: appHeight * 0.001,
@@ -171,12 +177,13 @@ class _LeaveCreationState extends State<LeaveCreation> {
                         ],
                       ),
                       Container(
-                        width: appWidth*0.35,
+                        width: appWidth*0.30,
+                        height: appHeight *0.05,
                         child: TextFormField(
                           decoration:  InputDecoration(
                             counterText: "",
                             contentPadding: EdgeInsets.only(left: 5),
-                            hintText: " Leave Name",
+                            hintText: " Amount ",
                             hintStyle: const TextStyle(
                               fontSize: 17,
                               fontWeight: FontWeight.bold,
@@ -194,6 +201,9 @@ class _LeaveCreationState extends State<LeaveCreation> {
                       )
 
                     ],
+                  ),
+                  SizedBox(
+                    height: appHeight * 0.001,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -221,12 +231,13 @@ class _LeaveCreationState extends State<LeaveCreation> {
                         ],
                       ),
                       Container(
-                        width: appWidth*0.35,
+                        width: appWidth*0.30,
+                        height: appHeight *0.05,
                         child: TextFormField(
                           decoration:  InputDecoration(
                             counterText: "",
                             contentPadding: EdgeInsets.only(left: 5),
-                            hintText: " Leave Name",
+                            hintText: " Percentage ",
                             hintStyle: const TextStyle(
                               fontSize: 17,
                               fontWeight: FontWeight.bold,
@@ -245,12 +256,15 @@ class _LeaveCreationState extends State<LeaveCreation> {
 
                     ],
                   ),
-                  const Text(
-                    "Cap",
-                    style: TextStyle(
-                        fontSize: 18,
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold),
+                  Padding(
+                    padding: const EdgeInsets.only(left:20),
+                    child: const Text(
+                      "Cap",
+                      style: TextStyle(
+                          fontSize: 18,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold),
+                    ),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -277,13 +291,17 @@ class _LeaveCreationState extends State<LeaveCreation> {
                           ),
                         ],
                       ),
+                      SizedBox(
+                        width:appWidth * .03,
+                      ),
                       Container(
-                        width: appWidth*0.35,
+                        width: appWidth*0.30,
+                        height: appHeight *0.05,
                         child: TextFormField(
                           decoration:  InputDecoration(
                             counterText: "",
                             contentPadding: EdgeInsets.only(left: 5),
-                            hintText: " Leave Name",
+                            hintText: "years",
                             hintStyle: const TextStyle(
                               fontSize: 17,
                               fontWeight: FontWeight.bold,
@@ -326,13 +344,17 @@ class _LeaveCreationState extends State<LeaveCreation> {
                           ),
                         ],
                       ),
+                      SizedBox(
+                        width:appWidth * .03,
+                      ),
                       Container(
-                        width: appWidth*0.35,
+                        width: appWidth*0.30,
+                        height: appHeight *0.05,
                         child: TextFormField(
                           decoration:  InputDecoration(
                             counterText: "",
                             contentPadding: EdgeInsets.only(left: 5),
-                            hintText: " Leave Name",
+                            hintText: "Month",
                             hintStyle: const TextStyle(
                               fontSize: 17,
                               fontWeight: FontWeight.bold,
@@ -356,7 +378,8 @@ class _LeaveCreationState extends State<LeaveCreation> {
                 height: appHeight * .05,
               ),
               MaterialButton(
-                padding: const EdgeInsets.fromLTRB(25, 10, 25, 10),
+               height: 50,
+                minWidth: appWidth*0.80,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10.0),
                 ),

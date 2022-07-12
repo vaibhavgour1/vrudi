@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:vrudi/ui/clientinputform/client_form.dart';
+import 'package:vrudi/ui/clientlist/client_list.dart';
 import 'package:vrudi/ui/employeList/employee_list.dart';
 
 class AppDrawer extends StatefulWidget {
@@ -138,7 +139,7 @@ class _AppDrawerState extends State<AppDrawer> {
                     Navigator.pop(context);
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const ClientForm()),
+                      MaterialPageRoute(builder: (context) =>  ClientList()),
                     );
                   },
                 ),
