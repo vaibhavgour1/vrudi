@@ -7,6 +7,7 @@ import 'package:vrudi/ui/chat/chat_screen.dart';
 import 'package:vrudi/ui/drawer/drawer.dart';
 import 'package:vrudi/ui/hrmsDetail/hrmshome.dart';
 import 'package:vrudi/ui/newanduseproject/new_project_template.dart';
+import 'package:vrudi/ui/professionalprofile/professional_client.dart';
 import 'package:vrudi/ui/tasklist/task_list.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -72,7 +73,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 color: Colors.blue,
               )),
           IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (cpntext)=>ProfesionalForm()));
+              },
               icon: const Icon(
                 Icons.person,
                 color: Colors.blue,

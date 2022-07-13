@@ -38,6 +38,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       if (result.success == true) {
         yield GetLoginState(message: result.message);
       } else {
+        log("hiii");
         yield GetLoginFailureState(message: result.message!);
       }
     } else {

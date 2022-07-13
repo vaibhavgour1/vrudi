@@ -33,6 +33,7 @@ class _SignUpState extends State<SignUp> {
   TextEditingController userTypeController = TextEditingController();
   TextEditingController professionalController = TextEditingController();
   bool isLoading = false;
+  var email;
   FirebaseAuth _auth = FirebaseAuth.instance;
   FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
   @override
@@ -69,6 +70,19 @@ class _SignUpState extends State<SignUp> {
                       validator: (numb) => Validator.emailValidator(numb!),
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       controller: emailController,
+                      onChanged: (t){
+                        if(t.length>3) {
+                          email = t;
+
+                          usernameController.text =
+                              email.substring(0, email.lastIndexOf("@"));
+
+
+                        }else{
+                          usernameController.clear();
+                        }
+                      },
+
                       decoration: const InputDecoration(
                         filled: true,
                         fillColor: Color.fromRGBO(242, 242, 242, 1),
@@ -115,6 +129,7 @@ class _SignUpState extends State<SignUp> {
                       keyboardType: TextInputType.name,
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       controller: usernameController,
+                      readOnly: true,
                       decoration: const InputDecoration(
                         filled: true,
                         fillColor: Color.fromRGBO(242, 242, 242, 1),
@@ -312,7 +327,9 @@ class _SignUpState extends State<SignUp> {
                       height: 25,
                     ),
                     InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
                       child: const Text(
                         "Log In",
                         style: TextStyle(
@@ -379,6 +396,7 @@ class _SignUpState extends State<SignUp> {
           );
         });
   }
+
   void bottomSheetProfessional() {
     showModalBottomSheet(
         context: context,
@@ -562,6 +580,10 @@ class _SignUpState extends State<SignUp> {
       Utility.showToast(msg: "Please Enter Name");
     } else if (usertype.isEmpty) {
       Utility.showToast(msg: "Please Enter Usertype");
+    }else if (securityQuestion.isEmpty) {
+      Utility.showToast(msg: "Please Enter securityQuestion");
+    }else if (securityAnswer.isEmpty) {
+      Utility.showToast(msg: "Please Enter securityAnswer");
     } else {
       Map<String, dynamic> signUpInput = <String, dynamic>{};
       signUpInput['email'] = email;

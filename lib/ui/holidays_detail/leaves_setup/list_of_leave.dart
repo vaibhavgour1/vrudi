@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vrudi/text_ui/leave_creation.dart';
 
 class LeaveSetupList extends StatefulWidget {
   const LeaveSetupList({Key? key}) : super(key: key);
@@ -35,7 +36,9 @@ child: ListView.builder(itemCount: 4,padding: EdgeInsets.symmetric(horizontal: 2
 })),
 
       floatingActionButton: FloatingActionButton(
-        onPressed: (){},
+        onPressed: (){
+          Navigator.push(context, MaterialPageRoute(builder: (context)=>LeaveCreation()));
+        },
         backgroundColor: Colors.red,
         child: Icon(Icons.add),
       ),

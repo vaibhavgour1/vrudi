@@ -1,14 +1,4 @@
-// import 'dart:io';
-//
-// import 'package:easy_localization/src/public_ext.dart';
-// import 'package:flutter/cupertino.dart';
-// import 'package:flutter/material.dart';
-// import 'package:fluttertoast/fluttertoast.dart';
-// import 'package:intl/intl.dart';
-// import 'package:path_provider/path_provider.dart';
-// import 'package:permission_handler/permission_handler.dart';
-// import 'package:vendor/utility/color.dart';
-//
+
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:vrudi/utility/colors.dart';
@@ -40,7 +30,7 @@ class Utility {
 
   static showToast({required String msg}) {
     msg.isEmpty
-        ? ""
+        ? "Empty Message"
         : Fluttertoast.showToast(
             msg: msg, textColor: Colors.white, backgroundColor: ColorPrimary, gravity: ToastGravity.BOTTOM);
   }
