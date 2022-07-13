@@ -26,10 +26,8 @@ class ApiProvider {
   }) async {
     log("$input");
     try {
-      Response res = await dio.get(Endpoint.LOGIN, queryParameters: {
-        "email": input["userId"],
-        "password": input["password"]
-      });
+      Response res =
+          await dio.get(Endpoint.LOGIN, queryParameters: {"email": input["userId"], "password": input["password"]});
       log("res--->$res");
       return LoginResponse.fromJson(res.toString());
     } catch (error) {
@@ -46,6 +44,7 @@ class ApiProvider {
       return LoginResponse(success: false, message: message);
     }
   }
+
   Future<SignUpResponse> signup(Map<String, dynamic> input) async {
     print(":signUP");
     var myres = '';
@@ -55,10 +54,8 @@ class ApiProvider {
     return signUpResponseFromMap(res.toString());
   }
 
-  Future<ForgetPasswordResponse> resetPassword(
-      Map<String, dynamic> input) async {
-    Response res = await dio
-        .post(Endpoint.FORGETPASSWORD, data: input, queryParameters: {});
+  Future<ForgetPasswordResponse> resetPassword(Map<String, dynamic> input) async {
+    Response res = await dio.post(Endpoint.FORGETPASSWORD, data: input, queryParameters: {});
     log("res-->$res");
     return ForgetPasswordResponse.fromJson(res.toString());
   }

@@ -1,5 +1,3 @@
-
-
 import 'dart:developer';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -30,7 +28,7 @@ class ForgetPasswordBloc extends Bloc<ForgetPasswordEvent, ForgetPasswordState> 
       ForgetPasswordResponse result = await apiProvider.resetPassword(input);
       EasyLoading.dismiss();
       log("$result");
-      if (result.hasErrors == false) {
+      if (result.success == true) {
         yield GetForgetPasswordState(message: result.message);
       } else {
         yield GetForgetPasswordFailureState(message: result.message);

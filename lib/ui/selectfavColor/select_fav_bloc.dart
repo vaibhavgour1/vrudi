@@ -27,7 +27,7 @@ class SelectFavBloc extends Bloc<SelectFavEvent, SelectFavState> {
       ForgetPasswordResponse result = await apiProvider.resetPassword(input);
       EasyLoading.dismiss();
       log("$result");
-      if (result.hasErrors == false) {
+      if (result.success == true) {
         yield GetSelectFavState(message: result.message);
       } else {
         yield GetSelectFavFailureState(message: result.message);
